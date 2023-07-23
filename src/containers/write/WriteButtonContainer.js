@@ -8,7 +8,7 @@ const WriteButtonContainer = () => {
     const {title, content, tags, post, postError} = useSelector(({write}) => ({
         title: write.title,
         content: write.content,
-        tags: write.tag,
+        tags: write.tags,
         post: write.post,
         postError: write.postError,
     }));
