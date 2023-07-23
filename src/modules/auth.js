@@ -25,8 +25,8 @@ export const initializeForm = createAction(
 
 export const signUp = createAction(
     SIGNUP,
-    ({email, password, checkPassword, username, phoneNumber, referenceUrl, part, organization, motto}) =>
-        ({email, password, checkPassword, username, phoneNumber, referenceUrl, part, organization, motto})
+    ({email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto}) =>
+        ({email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto})
 );
 
 export const login = createAction(
@@ -52,7 +52,7 @@ const initialState = {
         email: '',
         password: '',
         checkPassword: '',
-        username: '',
+        name: '',
         phoneNumber: '',
         referenceUrl: '',
         part: '',

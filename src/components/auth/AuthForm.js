@@ -73,9 +73,9 @@ const AuthForm = ({type, form, onChange, onSubmit}) => {
                         </div>
                         <div>
                             <h3>이름</h3>
-                            <StyledInput name="username"
+                            <StyledInput name="name"
                                          placeholder="이름"
-                                         value={form.username}
+                                         value={form.name}
                                          onChange={onChange}
                             />
                         </div>

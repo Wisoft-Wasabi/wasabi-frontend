@@ -24,8 +24,8 @@ const SignUpForm = () => {
     const onSubmit = e => {
         e.preventDefault();
 
-        const {email, password, checkPassword, username, phoneNumber, referenceUrl, part, organization, motto} = form;
-        dispatch(signUp({email, password, checkPassword, username, phoneNumber, referenceUrl, part, organization, motto}));
+        const {email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto} = form;
+        dispatch(signUp({email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto}));
     };
 
     useEffect(() => {
