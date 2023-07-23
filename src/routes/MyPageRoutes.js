@@ -1,7 +1,7 @@
 import ProfilePage from "../pages/ProfilePage";
 import MyLikePage from "../pages/MyLikePage";
 import {Route, Routes} from "react-router-dom";
-import MyPostPage from "../pages/MyPostPage";
+import MyBoardPage from "../pages/MyBoardPage";
 
 const MyPageRoutes = () => {
     return (
@@ -9,7 +9,7 @@ const MyPageRoutes = () => {
             <Routes>
                 <Route path="profile" element={<ProfilePage/>}/>
                 <Route path="likes" element={<MyLikePage/>}/>
-                <Route path="post" element={<MyPostPage/>}/>
+                <Route path="board" element={<MyBoardPage/>}/>
             </Routes>
         </div>
     );

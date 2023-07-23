@@ -1,20 +1,20 @@
 import WriteButton from "../../components/write/WriteButton";
 import {useDispatch, useSelector} from "react-redux";
-import {writePost} from "../../modules/write";
+import {writeBoard} from "../../modules/write";
 import {useEffect} from "react";
 
 const WriteButtonContainer = () => {
     const dispatch = useDispatch();
-    const {title, content, tags, post, postError} = useSelector(({write}) => ({
+    const {title, content, tags, board, boardError} = useSelector(({write}) => ({
         title: write.title,
         content: write.content,
         tags: write.tags,
-        post: write.post,
-        postError: write.postError,
+        board: write.board,
+        boardError: write.boardError,
     }));
 
     const onPublish = () => {
-        dispatch(writePost({
+        dispatch(writeBoard({
                 title,
                 content,
                 tags,
@@ -23,10 +23,10 @@ const WriteButtonContainer = () => {
     };
 
     useEffect(() => {
-            if (post) alert('성공!');
-            if (postError) console.log(postError);
+            if (board) alert('성공!');
+            if (boardError) console.log(boardError);
         },
-        [post, postError],
+        [board, boardError],
     );
 
     return (
