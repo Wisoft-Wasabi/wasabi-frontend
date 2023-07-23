@@ -1,26 +1,26 @@
 import {createAction, handleActions} from "redux-actions";
 import createRequestSaga, {createRequestActionTypes} from "../lib/createRequestSaga";
-import * as postAPI from "../lib/api/posts";
 import {takeLatest} from "redux-saga/effects";
+import * as boardAPI from "../lib/api/board";
 
 const INITIALIZE = 'write/INITIALIZE';
 const CHANGE_FIELD = 'write/CHANGE_FIELD';
-const [WRITE_POST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE] = createRequestActionTypes('write/WRITE_POST');
+const [WRITE_BOARD, WRITE_BOARD_SUCCESS, WRITE_BOARD_FAILURE] = createRequestActionTypes('write/WRITE_BOARD');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(
     CHANGE_FIELD,
     ({key, value}) => ({key, value})
 );
-export const writePost = createAction(
-    WRITE_POST,
+export const writeBoard = createAction(
+    WRITE_BOARD,
     ({title, content, tags, imageUrls}) => ({title, content, tags, imageUrls})
 );
 
 // 사가 생성
-const writePostSaga = createRequestSaga(WRITE_POST, postAPI.writePost);
+const writeBoardSaga = createRequestSaga(WRITE_BOARD, boardAPI.writeBoard);
 export function* writeSaga() {
-    yield takeLatest(WRITE_POST, writePostSaga);
+    yield takeLatest(WRITE_BOARD, writeBoardSaga);
 }
 
 const initialState = {
@@ -28,8 +28,8 @@ const initialState = {
     content: '',
     tags: [],
     imageUrls: [],
-    post: null,
-    postError: null,
+    board: null,
+    boardError: null,
 };
 
 const write = handleActions(
@@ -39,18 +39,18 @@ const write = handleActions(
             ...state,
             [key]: value,
         }),
-        [WRITE_POST]: (state) => ({
+        [WRITE_BOARD]: (state) => ({
             ...state,
             post: null,
             postError: null,
         }),
-        [WRITE_POST_SUCCESS]: (state, {payload: {post}}) => ({
+        [WRITE_BOARD_SUCCESS]: (state, {payload: {board}}) => ({
             ...state,
-            post,
+            board,
         }),
-        [WRITE_POST_FAILURE]: (state, {payload: {postError}}) => ({
+        [WRITE_BOARD_FAILURE]: (state, {payload: {boardError}}) => ({
             ...state,
-            postError,
+            boardError,
         }),
     },
     initialState,
