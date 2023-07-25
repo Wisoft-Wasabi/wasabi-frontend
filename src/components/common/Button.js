@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   color: #FFF;
   cursor: pointer;
   
-  ${props => props.fullWidth && css`
+  ${props => props.fullwidth && css`
     width: 100%;
   `}
 `;

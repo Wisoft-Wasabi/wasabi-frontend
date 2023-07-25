@@ -13,7 +13,7 @@ const App = () => {
             <Route path="/" element={<BoardListPage/>}/>
             <Route path="/auth/*" element={<AuthRoutes/>}/>
             <Route path="/write" element={<WritePage/>}/>
-            <Route path="/board/:name/:boardId" element={<BoardPage/>}/>
+            <Route path="/boards/:boardId" element={<BoardPage/>}/>
             <Route path="/mypage/*" element={<MyPageRoutes/>}/>
             <Route path="/admin" element={<AdminPage/>}/>
             <Route path="*" element={<NotFound/>}/>

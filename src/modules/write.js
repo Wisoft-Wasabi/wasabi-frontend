@@ -41,8 +41,8 @@ const write = handleActions(
         }),
         [WRITE_BOARD]: (state) => ({
             ...state,
-            post: null,
-            postError: null,
+            board: null,
+            boardError: null,
         }),
         [WRITE_BOARD_SUCCESS]: (state, {payload: {board}}) => ({
             ...state,

@@ -8,7 +8,7 @@ client.interceptors.request.use(
 
         if (member !== null) {
             config.headers['Content-Type'] = 'application/json';
-            config.headers['Authorization'] = `Bearer ${member.authInfo}`;
+            config.headers['Authorization'] = `Bearer ${member.data.accessToken}`;
         }
         return config;
     },

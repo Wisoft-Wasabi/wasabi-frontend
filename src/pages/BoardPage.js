@@ -1,8 +1,12 @@
 import BoardViewerContainer from "../containers/board/BoardViewerContainer";
+import LikeContainer from "../containers/like/LikeContainer";
 
 const BoardPage = () => {
     return (
-        <BoardViewerContainer/>
+        <div>
+            <BoardViewerContainer/>
+            <LikeContainer/>
+        </div>
     );
 };
 
