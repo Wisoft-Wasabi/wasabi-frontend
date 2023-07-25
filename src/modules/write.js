@@ -44,11 +44,11 @@ const write = handleActions(
             board: null,
             boardError: null,
         }),
-        [WRITE_BOARD_SUCCESS]: (state, {payload: {board}}) => ({
+        [WRITE_BOARD_SUCCESS]: (state, {payload: board}) => ({
             ...state,
             board,
         }),
-        [WRITE_BOARD_FAILURE]: (state, {payload: {boardError}}) => ({
+        [WRITE_BOARD_FAILURE]: (state, {payload: boardError}) => ({
             ...state,
             boardError,
         }),

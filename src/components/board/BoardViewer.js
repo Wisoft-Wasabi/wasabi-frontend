@@ -61,7 +61,7 @@ const BoardViewer = ({board, boardError, loading}) => {
         return null;
     }
 
-    const {title, content, writer, createdDate, tags, views} = board.data;
+    const {title, content, writer, createdAt, tags, views} = board.data;
 
     return (
         <BoardViewerBlock>
@@ -69,7 +69,7 @@ const BoardViewer = ({board, boardError, loading}) => {
                 <h1>{title}</h1>
                 <SubInfo>
                     <span><b>{writer}</b></span>
-                    <span>{new Date(createdDate).toLocaleString()}</span>
+                    <span>{new Date(createdAt).toLocaleString()}</span>
                     <span><BiShow/>{views}</span>
                 </SubInfo>
             </BoardHead>
