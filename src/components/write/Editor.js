@@ -8,11 +8,22 @@ const EditorBlock = styled.div`
 `;
 
 const TitleInput = styled.input`
-
+    margin-bottom: 1rem;
 `;
 
 const QuillWrapper = styled.div`
-    
+  margin-bottom: 1rem;
+  /* 최소 크기 지정 및 padding 제거 */
+  .ql-editor {
+    padding: 0;
+    min-height: 320px;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }.ql-editor.
+
+  ql-blank::before { /* 실제 내용 바로 앞에서 생성되는 자식 요소 */
+    left: 0px;
+  }
 `;
 
 const Editor = ({title, content, imageUrls, onChangeEditor}) => {
@@ -41,7 +52,7 @@ const Editor = ({title, content, imageUrls, onChangeEditor}) => {
         const quill = quillInstance.current;
         quill.on('text-change', () => {
             onChangeEditor({key: 'content', value: quill.root.innerHTML});
-        })
+        });
     }, [onChangeEditor]);
 
     const onChangeTitle = e => {

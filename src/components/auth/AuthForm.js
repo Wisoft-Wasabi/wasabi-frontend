@@ -121,7 +121,7 @@ const AuthForm = ({type, form, onChange, onSubmit}) => {
                         </div>
                     </>
                 )}
-                <Button fullWidth>{text}</Button>
+                <Button fullwidth="true">{text}</Button>
             </form>
             <Footer>
                 {type === 'login' ? (

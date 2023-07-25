@@ -8,7 +8,7 @@ const UNLOAD_BOARD = 'board/UNLOAD_BOARD'; // 게시글 페이지에서 벗어�
 
 export const readBoard = createAction(
     READ_BOARD,
-    boardID => boardID,
+    boardId => boardId,
 );
 
 export const unloadBoard = createAction(UNLOAD_BOARD);

@@ -23,7 +23,7 @@ const WriteButtonContainer = () => {
     };
 
     useEffect(() => {
-            if (board) alert('성공!');
+            if (board) console.log('게시글 작성 성공');
             if (boardError) console.log(boardError);
         },
         [board, boardError],

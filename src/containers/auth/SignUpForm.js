@@ -17,7 +17,7 @@ const SignUpForm = () => {
                 form: 'signUp',
                 key: name,
                 value,
-            })
+            }),
         );
     };
 
