@@ -70,6 +70,11 @@ const LikeImage = styled.img`
   object-fit: cover;
 `;
 
+const SelectBox = styled.select`
+  margin-top: 1rem;
+  float: right;
+`;
+
 const BoardCard = ({board}) => {
     const {title, writer, createdAt, likeCount, views} = board;
 
@@ -79,7 +84,7 @@ const BoardCard = ({board}) => {
             <h2><b>{title}</b></h2>
             <SubInfo>
                 <span>{writer}</span>
-                <span>{createdAt}</span>
+                <span>{new Date(createdAt).toLocaleString()}</span>
             </SubInfo>
             <CountInfo>
                 <span><LikeImage src={FillLike}/>{likeCount}</span>
@@ -89,16 +94,21 @@ const BoardCard = ({board}) => {
     );
 };
 
-const BoardList = ({boards, boardsError, loading}) => {
+const BoardList = ({boards, boardsError, loading, onSelectFilter}) => {
     if (boardsError) {
         return  <BoardListBlock>에러 발생!</BoardListBlock>
     }
 
     return (
         <BoardListBlock>
+            <SelectBox onChange={e => onSelectFilter(e)}>
+                <option key="latest" value="latest">최신순</option>
+                <option key="likes" value="likes">좋아요순</option>
+                <option key="views" value="views">조회수순</option>
+            </SelectBox>
             {!loading && boards && (
                 <div>
-                    {boards.map(board => (
+                    {boards.data.content.map(board => (
                         <BoardCard board={board} key={board.id}/>
                     ))}
                 </div>

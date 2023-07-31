@@ -14,12 +14,17 @@ const BoardListContainer = () => {
         loading: loading['boards/BOARD_LIST'],
     }));
 
-    useEffect(() => {
+    useEffect((e) => {
         dispatch(boardList(condition));
     }, [dispatch, condition]);
 
+    const onSelectFilter = (e) => {
+        const value = e.target.options[e.target.selectedIndex].value;
+        dispatch(boardList(value));
+    };
+
     return (
-        <BoardList boards={boards} boardsError={boardsError} loading={loading}/>
+        <BoardList boards={boards} boardsError={boardsError} loading={loading} onSelectFilter={onSelectFilter}/>
     );
 };
 
