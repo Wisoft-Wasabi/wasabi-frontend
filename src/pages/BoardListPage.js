@@ -1,4 +1,3 @@
-import SortBox from "../components/boards/SortBox";
 import BoardListContainer from "../containers/boards/BoardListContainer";
 
 const BoardListPage = () => {
@@ -20,7 +19,6 @@ const BoardListPage = () => {
     return (
         <div>
             {/*<SortBox options={options}/>*/}
-            <SortBox/>
             <BoardListContainer/>
         </div>
     );
