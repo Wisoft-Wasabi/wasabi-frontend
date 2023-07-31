@@ -14,7 +14,7 @@ const BoardListContainer = () => {
         loading: loading['boards/BOARD_LIST'],
     }));
 
-    useEffect((e) => {
+    useEffect(() => {
         dispatch(boardList(condition));
     }, [dispatch, condition]);
 
