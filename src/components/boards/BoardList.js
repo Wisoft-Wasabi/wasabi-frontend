@@ -30,6 +30,8 @@ const BoardCardBlock = styled.div`
   border: 1px solid #f2f5f7;
   overflow: hidden;
   margin: 3rem 1.5rem;
+  cursor: pointer;
+
   h2 {
     font-size: 2rem;
     margin: 0.5rem 0;
@@ -57,7 +59,7 @@ const SubInfo = styled.div`
 const CountInfo = styled.div`
   padding-left: 0.6rem;
   margin-top: 2.5rem;
-  
+
   span + span {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -72,14 +74,16 @@ const LikeImage = styled.img`
 
 const SelectBox = styled.select`
   margin-top: 1rem;
+  margin-right: 10rem;
   float: right;
+
 `;
 
-const BoardCard = ({board}) => {
+const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
 
     return (
-        <BoardCardBlock>
+        <BoardCardBlock onClick={onNavigateDetail}>
             <BoardImage src={ThumbNail}/>
             <h2><b>{title}</b></h2>
             <SubInfo>
@@ -94,26 +98,28 @@ const BoardCard = ({board}) => {
     );
 };
 
-const BoardList = ({boards, boardsError, loading, onSelectFilter}) => {
+const BoardList = ({boards, boardsError, loading, onSelectFilter, onNavigateDetail}) => {
     if (boardsError) {
-        return  <BoardListBlock>에러 발생!</BoardListBlock>
+        return <BoardListBlock>에러 발생!</BoardListBlock>
     }
 
     return (
-        <BoardListBlock>
+        <>
             <SelectBox onChange={e => onSelectFilter(e)}>
                 <option key="latest" value="latest">최신순</option>
                 <option key="likes" value="likes">좋아요순</option>
                 <option key="views" value="views">조회수순</option>
             </SelectBox>
-            {!loading && boards && (
-                <div>
-                    {boards.data.content.map(board => (
-                        <BoardCard board={board} key={board.id}/>
-                    ))}
-                </div>
-            )}
-        </BoardListBlock>
+            <BoardListBlock>
+                {!loading && boards && (
+                    <div>
+                        {boards.data.content.map(board => (
+                            <BoardCard board={board} key={board.id} onNavigateDetail={() => onNavigateDetail(board.id)}/>
+                        ))}
+                    </div>
+                )}
+            </BoardListBlock>
+        </>
     );
 };
 

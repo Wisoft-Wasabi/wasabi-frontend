@@ -2,10 +2,11 @@ import BoardList from "../../components/boards/BoardList";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {boardList} from "../../modules/boards";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 const BoardListContainer = () => {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const condition = searchParams.get('sortBy');
     const dispatch = useDispatch();
     const {boards, boardsError, loading} = useSelector(({boards, loading}) => ({
@@ -23,8 +24,17 @@ const BoardListContainer = () => {
         dispatch(boardList(value));
     };
 
+    const onNavigateDetail = (boardId) => {
+        navigate(`boards/${boardId}`);
+    };
+
     return (
-        <BoardList boards={boards} boardsError={boardsError} loading={loading} onSelectFilter={onSelectFilter}/>
+        <BoardList boards={boards}
+                   boardsError={boardsError}
+                   loading={loading}
+                   onSelectFilter={onSelectFilter}
+                   onNavigateDetail={onNavigateDetail}
+        />
     );
 };
 
