@@ -1,38 +1,40 @@
 import Like from "../../components/like/Like";
 import {useDispatch, useSelector} from "react-redux";
-import {cancelLike, registerLike} from "../../modules/like";
+import {cancelLike, getLike, registerLike} from "../../modules/like";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 const LikeContainer = () => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
-    const board = useSelector(state => state.board.board);
-    const [like, setLike] = useState(false);
+    const {board, like} = useSelector(({board, like}) => ({
+        board: board.board,
+        like: like.like,
+    }));
+    const [likeState, setLikeState] = useState(false);
 
     // 서버에서 받은 응답이 존재하는지 확인
     useEffect(() => {
         if (board && board.data) {
-            setLike(board.data.isLike);
+            setLikeState(board.data.isLike);
+            console.log(likeState);
         }
-    }, [board]);
+    }, [board, likeState]);
 
     const onToggleLike = () => {
-        if (board && board.data) {
-            if (like === false) {
-                setLike(!like);
-                dispatch(registerLike(boardId));
-            } else if (like === true) {
-                setLike(!like);
-                dispatch(cancelLike(boardId));
-            }
-        } else {
-            console.log('NO Data.');
+        if (likeState === false) {
+            dispatch(registerLike({boardId}));
+        } else if (likeState === true) {
+            dispatch(cancelLike({boardId}));
+        }
+        dispatch(getLike({boardId}));
+        if (like && like.data) {
+            setLikeState(like.data.isLike);
         }
     };
 
     return (
-        <Like like={like} onToggleLike={onToggleLike}/>
+        <Like likeState={likeState} onToggleLike={onToggleLike}/>
     );
 };
 

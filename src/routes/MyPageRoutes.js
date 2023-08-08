@@ -9,7 +9,7 @@ const MyPageRoutes = () => {
             <Routes>
                 <Route path="profile" element={<ProfilePage/>}/>
                 <Route path="likes" element={<MyLikePage/>}/>
-                <Route path="board" element={<MyBoardPage/>}/>
+                <Route path="boards" element={<MyBoardPage/>}/>
             </Routes>
         </div>
     );
