@@ -12,11 +12,11 @@ const LikeImage = styled.img`
   object-fit: cover;
 `;
 
-const Like = ({like, onToggleLike}) => {
+const Like = ({likeState, onToggleLike}) => {
 
     return (
         <LikeBlock>
-            <LikeImage src={like ? FillLike : EmptyLike} onClick={onToggleLike}/>
+            <LikeImage src={likeState ? FillLike : EmptyLike} onClick={onToggleLike}/>
         </LikeBlock>
     );
 };
