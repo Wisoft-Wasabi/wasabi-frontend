@@ -18,7 +18,7 @@ const MyBoardListContainer = () => {
     }, [dispatch]);
 
     const onNavigateDetail = (boardId) => {
-        navigate(`${boardId}`);
+        navigate(`/boards/${boardId}`);
     };
 
     return (
