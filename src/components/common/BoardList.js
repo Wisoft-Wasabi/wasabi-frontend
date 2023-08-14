@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import {BiShow} from "react-icons/bi";
 import ThumbNail from "../../assets/thumbNail.jpg";
 import FillLike from "../../assets/fill.png";
+import {BiShow} from "react-icons/bi";
+import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
 const BoardListBlock = styled.div`
   padding-right: 1rem;
@@ -72,13 +73,6 @@ const LikeImage = styled.img`
   object-fit: cover;
 `;
 
-const SelectBox = styled.select`
-  margin-top: 1rem;
-  margin-right: 10rem;
-  float: right;
-
-`;
-
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
 
@@ -98,29 +92,22 @@ const BoardCard = ({board, onNavigateDetail}) => {
     );
 };
 
-const BoardList = ({boards, boardsError, loading, onSelectFilter, onNavigateDetail}) => {
-    if (boardsError) {
-        return <BoardListBlock>에러 발생!</BoardListBlock>
-    }
+const BoardList = ({boards, loading}) => {
+    const navigate = useNavigate();
+    const onNavigateDetail = (boardId) => {
+        navigate(`/boards/${boardId}`);
+    };
 
     return (
-        <>
-            <SelectBox onChange={e => onSelectFilter(e)}>
-                <option value="">== 정렬 기준 ==</option>
-                <option key="latest" value="latest">최신순</option>
-                <option key="likes" value="likes">좋아요순</option>
-                <option key="views" value="views">조회수순</option>
-            </SelectBox>
-            <BoardListBlock>
-                {!loading && boards && (
-                    <div>
-                        {boards.data.content.map(board => (
-                            <BoardCard board={board} key={board.id} onNavigateDetail={() => onNavigateDetail(board.id)}/>
-                        ))}
-                    </div>
-                )}
-            </BoardListBlock>
-        </>
+        <BoardListBlock>
+            {!loading && boards && (
+                <div>
+                    {boards.data.content.map(board => (
+                        <BoardCard board={board} key={board.id} onNavigateDetail={() => onNavigateDetail(board.id)}/>
+                    ))}
+                </div>
+            )}
+        </BoardListBlock>
     );
 };
 
