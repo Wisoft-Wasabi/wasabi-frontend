@@ -106,6 +106,7 @@ const BoardList = ({boards, boardsError, loading, onSelectFilter, onNavigateDeta
     return (
         <>
             <SelectBox onChange={e => onSelectFilter(e)}>
+                <option value="">== 정렬 기준 ==</option>
                 <option key="latest" value="latest">최신순</option>
                 <option key="likes" value="likes">좋아요순</option>
                 <option key="views" value="views">조회수순</option>

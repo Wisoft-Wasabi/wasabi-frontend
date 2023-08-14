@@ -1,7 +1,7 @@
 import createRequestSaga, {createRequestActionTypes} from "../lib/createRequestSaga";
 import {createAction, handleActions} from "redux-actions";
 import * as likeAPI from "../lib/api/like";
-import {takeLatest, takeEvery} from "redux-saga/effects";
+import {takeLatest} from "redux-saga/effects";
 
 const [REGISTER_LIKE, REGISTER_LIKE_SUCCESS, REGISTER_LIKE_FAILURE] = createRequestActionTypes('like/REGISTER_LIKE');
 const [CANCEL_LIKE, CANCEL_LIKE_SUCCESS, CANCEL_LIKE_FAILURE] = createRequestActionTypes('like/CANCEL_LIKE');
@@ -26,10 +26,11 @@ export const getLike = createAction(
 const registerLikeSaga = createRequestSaga(REGISTER_LIKE, likeAPI.registerLike);
 const cancelLikeSaga = createRequestSaga(CANCEL_LIKE, likeAPI.cancelLike);
 const getLikeSaga = createRequestSaga(GET_LIKE, likeAPI.getLike);
+
 export function* likeSaga() {
     yield takeLatest(REGISTER_LIKE, registerLikeSaga);
     yield takeLatest(CANCEL_LIKE, cancelLikeSaga);
-    yield takeEvery(GET_LIKE, getLikeSaga);
+    yield takeLatest(GET_LIKE, getLikeSaga);
 }
 
 const initialState = {
