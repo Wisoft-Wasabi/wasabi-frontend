@@ -101,7 +101,7 @@ const BoardList = ({boards, loading}) => {
     return (
         <BoardListBlock>
             {!loading && boards && (
-                <div>
+                <div style={{display: "flex"}}>
                     {boards.data.content.map(board => (
                         <BoardCard board={board} key={board.id} onNavigateDetail={() => onNavigateDetail(board.id)}/>
                     ))}

@@ -47,7 +47,6 @@ const LoginForm = () => {
         if (authError) {
             console.log(authError);
             console.log('로그인 실패');
-            return;
         }
     }, [auth, authError]);
 

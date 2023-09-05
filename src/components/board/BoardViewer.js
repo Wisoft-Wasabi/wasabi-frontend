@@ -50,7 +50,7 @@ const Tags = styled.div`
 const BoardViewer = ({board, boardError, loading}) => {
     // 에러 발생 시
     if (boardError) {
-        if (boardError.response && boardError.response.status === 400) {
+        if (boardError.response.status === 404) {
             return <BoardViewerBlock>존재하지 않는 포스트입니다.</BoardViewerBlock>
         }
         return <BoardViewerBlock>오류 발생!</BoardViewerBlock>

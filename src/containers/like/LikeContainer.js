@@ -23,16 +23,16 @@ const LikeContainer = () => {
     }, [board, likeState]);
 
     const onToggleLike = () => {
-        if (likeState === false) {
+        if (!likeState) {
             dispatch(registerLike({boardId}));
-        } else if (likeState === true) {
+        } else {
             dispatch(cancelLike({boardId}));
         }
     };
 
     // 좋아요 등록/취소 요청이 끝났는지 확인
     useEffect(() => {
-        if (loadingRegister === false || loadingCancel === false) {
+        if (!loadingRegister || !loadingCancel) {
             dispatch(getLike({boardId}));
         }
     }, [loadingRegister, loadingCancel, dispatch, boardId]);

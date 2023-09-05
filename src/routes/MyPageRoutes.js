@@ -5,13 +5,11 @@ import MyBoardPage from "../pages/MyBoardPage";
 
 const MyPageRoutes = () => {
     return (
-        <div>
-            <Routes>
-                <Route path="profile" element={<ProfilePage/>}/>
-                <Route path="likes" element={<MyLikePage/>}/>
-                <Route path="boards" element={<MyBoardPage/>}/>
-            </Routes>
-        </div>
+        <Routes>
+            <Route path="profile" element={<ProfilePage/>}/>
+            <Route path="likes" element={<MyLikePage/>}/>
+            <Route path="boards" element={<MyBoardPage/>}/>
+        </Routes>
     );
 };
 
