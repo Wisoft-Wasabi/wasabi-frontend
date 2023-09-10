@@ -24,20 +24,20 @@ const StyledInput = styled.input`
   padding: 0.25rem 0 0.25rem 0.1rem;
 `;
 
-const MyProfile = ({myProfile, myProfileError, loading}) => {
+const MyProfile = ({myProfile, myProfileError, loading, onChange, onUpdateProfile}) => {
     if (myProfileError) {
-        return <div>내 프로필 조회 실패!</div>
+        return <div>에러 발생</div>
     }
 
     if (loading || !myProfile) {
         return null;
     }
 
-    const {email, name, phoneNumber, referenceUrl, part, organization, motto, role} = myProfile.data;
+    const {email, name, phoneNumber, referenceUrl, part, organization, motto, role} = myProfile;
 
     return (
         <MyProfileBlock>
-            {myProfile && myProfile.data && (
+            {myProfile && (
                 <>
                     <h2>내 프로필</h2>
                     <form>
@@ -46,6 +46,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="email"
                                          placeholder="이메일"
                                          value={email}
+                                         disabled
                             />
                         </div>
                         <div>
@@ -53,6 +54,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="name"
                                          placeholder="이름"
                                          value={name}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -60,6 +62,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="phoneNumber"
                                          placeholder="010 - XXXX - XXXX"
                                          value={phoneNumber}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -67,6 +70,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="referenceUrl"
                                          placeholder="URL"
                                          value={referenceUrl}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -74,6 +78,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="part"
                                          placeholder="직군"
                                          value={part}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -81,6 +86,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="organization"
                                          placeholder="소속"
                                          value={organization}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -88,6 +94,7 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="motto"
                                          placeholder="한 줄 소개"
                                          value={motto}
+                                         onChange={onChange}
                             />
                         </div>
                         <div>
@@ -95,9 +102,11 @@ const MyProfile = ({myProfile, myProfileError, loading}) => {
                             <StyledInput name="role"
                                          placeholder="권한"
                                          value={role}
+                                         disabled
                             />
                         </div>
-                        <Button fullwidth="true">수정하기</Button>
+                        <Button fullwidth="true"
+                                onClick={onUpdateProfile}>수정하기</Button>
                     </form>
                 </>
             )}
