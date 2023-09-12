@@ -1,6 +1,8 @@
+import SignUpListDataContainer from "../containers/admin/SignUpListDataContainer";
+
 const AdminPage = () => {
     return (
-        <div>관리자 페이지</div>
+        <SignUpListDataContainer/>
     );
 };
 

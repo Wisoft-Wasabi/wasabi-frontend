@@ -7,6 +7,7 @@ import board, {boardSaga} from "./board";
 import like, {likeSaga} from "./like";
 import boards, {boardsSaga} from "./boards";
 import myPage, {myPageSaga} from "./mypage";
+import admin, {adminSaga} from "./admin";
 
 const rootReducer = combineReducers({
     loading,
@@ -16,10 +17,11 @@ const rootReducer = combineReducers({
     like,
     boards,
     myPage,
+    admin,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(), writeSaga(), boardSaga(), likeSaga(), boardsSaga(), myPageSaga()]);
+    yield all([authSaga(), writeSaga(), boardSaga(), likeSaga(), boardsSaga(), myPageSaga(), adminSaga()]);
 }
 
 export default rootReducer;
