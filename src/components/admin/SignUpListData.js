@@ -1,8 +1,25 @@
 import SignUpList from "./SignUpList";
-import {useMemo} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import Button from "../common/Button";
 
-const SignUpListData = ({signUpList, signUpListError}) => {
+const SignUpListData = ({signUpList, signUpListError, onAccept, acceptLoading}) => {
+    const [originSignUpList, setOriginSignUpList] = useState([]);
+
+    useEffect(() => {
+        if (signUpList && signUpList.data) {
+            setOriginSignUpList(signUpList.data.content);
+            console.log(originSignUpList);
+        }
+    }, [signUpList, originSignUpList])
+
+    const onRemove = useCallback(
+        (member) => {
+            if (!acceptLoading) {
+                // const nextSignUpList = originSignUpList.filter(m => m !== member);
+                setOriginSignUpList((originSignUpList) => originSignUpList.filter(m => m.id !== member.id));
+            }
+        }, [acceptLoading]);
+
     const columns = useMemo(() => [
         {
             Header: "번호",
@@ -29,14 +46,17 @@ const SignUpListData = ({signUpList, signUpListError}) => {
                     id: member.id,
                     name: member.name,
                     email: member.email,
-                    button: <Button>승인하기</Button>
+                    button: <Button onClick={() => {
+                        onAccept(member.id);
+                        onRemove(member);
+                    }}>승인하기</Button>
                 }
             ));
         }
 
         if (signUpListError) return <div>에러 발생!</div>
 
-    }, [signUpList, signUpListError]);
+    }, [signUpList, signUpListError, onAccept]);
 
     return (
         <>
