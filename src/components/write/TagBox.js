@@ -69,12 +69,14 @@ const TagBox = ({tags, onChangeTags}) => {
     const onKeyUp = useCallback(
         e => {
             if (e.key === 'Enter') {
-                e.preventDefault();
-                insertTag(input.trim(), e);
+                if (tags.length < 1) {
+                    e.preventDefault();
+                    insertTag(input.trim(), e);
+                } else alert("하나의 태그만 등록할 수 있습니다.");
                 setInput('');
             }
         },
-        [input, insertTag]
+        [input, insertTag, tags.length]
     );
 
     useEffect(() => {
