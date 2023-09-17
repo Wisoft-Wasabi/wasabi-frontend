@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import {BiShow} from "react-icons/bi";
+import WriterViewer from "./WriterViewer";
+import {useState} from "react";
 
 const BoardViewerBlock = styled.div`
     margin-top: 4rem;
@@ -48,6 +50,8 @@ const Tags = styled.div`
 `;
 
 const BoardViewer = ({board, boardError, loading}) => {
+    const [isOpenWriter, setIsOpenWriter] = useState(false);
+
     // 에러 발생 시
     if (boardError) {
         if (boardError.response.status === 404) {
@@ -68,10 +72,11 @@ const BoardViewer = ({board, boardError, loading}) => {
             <BoardHead>
                 <h1>{title}</h1>
                 <SubInfo>
-                    <span><b>{writer}</b></span>
+                    <span style={{cursor: "pointer"}} onClick={() => setIsOpenWriter(!isOpenWriter)}><b>{writer.name}</b></span>
                     <span>{new Date(createdAt).toLocaleString()}</span>
                     <span><BiShow/>{views}</span>
                 </SubInfo>
+                {isOpenWriter && <WriterViewer writer={writer}/>}
             </BoardHead>
             <BoardContent dangerouslySetInnerHTML={{__html: content}}/> {/* HTML 적용 */}
             <Tags>
