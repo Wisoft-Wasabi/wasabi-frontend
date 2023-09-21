@@ -65,7 +65,7 @@ const BoardViewer = ({board, boardError, loading}) => {
         return null;
     }
 
-    const {title, content, writer, createdAt, tags, views} = board.data;
+    const {title, content, writer, createdAt, tag, views} = board.data;
 
     return (
         <BoardViewerBlock>
@@ -79,11 +79,11 @@ const BoardViewer = ({board, boardError, loading}) => {
                 {isOpenWriter && <WriterViewer writer={writer}/>}
             </BoardHead>
             <BoardContent dangerouslySetInnerHTML={{__html: content}}/> {/* HTML 적용 */}
-            <Tags>
-                {tags.map(tag => (
+            {tag && (
+                <Tags>
                     <div className="tag">#{tag}</div>
-                ))}
-            </Tags>
+                </Tags>
+            )}
         </BoardViewerBlock>
     );
 };
