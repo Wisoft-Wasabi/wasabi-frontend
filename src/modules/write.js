@@ -14,7 +14,7 @@ export const changeField = createAction(
 );
 export const writeBoard = createAction(
     WRITE_BOARD,
-    ({title, content, tags, imageUrls}) => ({title, content, tags, imageUrls})
+    ({title, content, tag, imageUrls}) => ({title, content, tag, imageUrls})
 );
 
 // 사가 생성
@@ -26,7 +26,7 @@ export function* writeSaga() {
 const initialState = {
     title: '',
     content: '',
-    tags: [],
+    tag: '',
     imageUrls: [],
     board: null,
     boardError: null,
