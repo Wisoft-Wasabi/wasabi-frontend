@@ -5,10 +5,10 @@ import {useEffect} from "react";
 
 const WriteButtonContainer = () => {
     const dispatch = useDispatch();
-    const {title, content, tags, board, boardError} = useSelector(({write}) => ({
+    const {title, content, tag, board, boardError} = useSelector(({write}) => ({
         title: write.title,
         content: write.content,
-        tags: write.tags,
+        tag: write.tag,
         board: write.board,
         boardError: write.boardError,
     }));
@@ -17,7 +17,7 @@ const WriteButtonContainer = () => {
         dispatch(writeBoard({
                 title,
                 content,
-                tags,
+                tag,
             }),
         );
     };
