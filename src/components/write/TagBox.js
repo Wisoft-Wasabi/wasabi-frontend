@@ -1,22 +1,35 @@
 import React, {useCallback, useState} from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
 
 const TagBoxBlock = styled.div`
 
 `;
 
-const TagInput = styled.input`
+const TagBoxContent = styled.div`
+  height: 30px;
+`;
 
+const TagInput = styled.input`
+  height: 100%;
+  box-sizing: border-box;
 `;
 
 const Tag = styled.div`
-  margin-right: 0.5rem;
+  width: fit-content;
+  outline: none;
+  border: none;
+  padding: 7px;
+  border-radius: 20px;
+  background-color: #4BC75F;
+  color: #FFF;
+  margin-top: 0.2rem;
 `;
 
 const TagItem = React.memo(({tag, onRemove}) => (
     <Tag>
         <span>#{tag}</span>
-        <span onClick={onRemove}>X</span>
+        <span onClick={onRemove} style={{cursor: "pointer"}}>&nbsp;X</span>
     </Tag>
 ));
 
@@ -44,27 +57,38 @@ const TagBox = ({onChangeTag, write}) => {
         []
     );
 
-    // Enter 누르면 input을 앞뒤 공백 없앤 후 추가
-    const onKeyUp = useCallback(
+    const onInsertTag = useCallback(
         e => {
-            if (e.key === 'Enter') {
-                if (write.tag === "") {
-                    e.preventDefault();
-                    insertTag(input.trim(), e);
-                } else alert("하나의 태그만 등록할 수 있습니다.");
+            if (write.tag === "") {
+                e.preventDefault();
+                insertTag(input.trim(), e); // input의 앞뒤 공백을 없앤 후 추가
+            } else {
+                alert("하나의 태그만 등록할 수 있습니다.");
                 setInput('');
             }
         },
         [input, insertTag, write.tag]
     );
 
+    const onKeyUp = useCallback(
+        e => {
+            if (e.key === 'Enter') {
+                onInsertTag(e);
+            }
+        },
+        [onInsertTag]
+    );
+
     return (
         <TagBoxBlock>
-            <TagInput placeholder="태그를 입력하세요."
-                      value={input}
-                      onChange={onChange}
-                      onKeyUp={onKeyUp}
-            />
+            <TagBoxContent>
+                <TagInput placeholder="태그를 입력하세요."
+                          value={input}
+                          onChange={onChange}
+                          onKeyUp={onKeyUp}
+                />
+                <Button style={{marginLeft: "0.1rem", height: "100%"}} onClick={onInsertTag}>등록</Button>
+            </TagBoxContent>
             {write.tag ? (<TagItem tag={write.tag} onRemove={onRemove}/>) : null}
         </TagBoxBlock>
     );
