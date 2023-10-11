@@ -1,7 +1,7 @@
 import client from "./client";
 
 export const searchKeyword = (keyword) => {
-    return client.get(`/api/boards`, {
+    return client.get(`/boards`, {
         params: {
             keyword: keyword,
         }
