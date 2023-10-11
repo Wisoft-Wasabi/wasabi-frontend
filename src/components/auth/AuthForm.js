@@ -1,6 +1,7 @@
 import Button from "../common/Button";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
 const AuthFormBlock = styled.div`
   align-items: center; /* 수직 중앙 정렬 */
@@ -25,6 +26,24 @@ const StyledInput = styled.input`
   padding: 0.25rem 0 0.25rem 0.1rem;
 `;
 
+const StyledSelect = styled.select`
+  width: 100%;
+  border: 0.5px solid darkgrey;
+  border-radius: 2.5px;
+  font-size: 1rem;
+  padding: 0.25rem 0 0.25rem 0.1rem;
+`;
+
+const StyledOption = styled.option`
+  width: 100%;
+  box-sizing: border-box;
+  border: 0.5px solid darkgrey;
+  border-radius: 2.5px;
+  font-size: 1rem;
+  padding: 0.25rem 0 0.25rem 0.1rem;
+  background-color: ${(props) => (props.selected ? '#4BC75F' : '#FFF')};
+`;
+
 const Footer = styled.div`
   margin-top: 30px;
   text-align: center;
@@ -36,7 +55,18 @@ const textMap = {
     signUp: '회원가입',
 }; // 객체
 
-const AuthForm = ({type, form, onChange, onSubmit}) => {
+const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedPart, setSelectedPart] = useState('직군');
+
+    const handleIsOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleSelectedPart = part => {
+        setSelectedPart(part);
+    };
+
     const text = textMap[type];
 
     return (
@@ -97,11 +127,18 @@ const AuthForm = ({type, form, onChange, onSubmit}) => {
                         </div>
                         <div>
                             <h3>직군</h3>
-                            <StyledInput name="part"
-                                         placeholder="직군"
-                                         value={form.part}
-                                         onChange={onChange}
-                            />
+                            <StyledSelect value={selectedPart} onClick={handleIsOpen} onChange={part => handleSelectedPart(part)}>
+                                {selectedPart}
+                            </StyledSelect>
+                            {isOpen && (['BackEnd', 'FrontEnd', 'Mobile', 'Infra', 'DBA', 'Developer'].map(part => (
+                                <StyledOption name="part"
+                                              key={part}
+                                              value={part.toUpperCase()}
+                                              onClick={onSelectPart}
+                                >
+                                    {part}
+                                </StyledOption>
+                            )))}
                         </div>
                         <div>
                             <h3>소속</h3>
