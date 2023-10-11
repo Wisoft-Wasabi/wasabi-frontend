@@ -79,6 +79,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                                  placeholder="이메일"
                                  value={form.email}
                                  onChange={onChange}
+                                 required="required"
                     />
                 </div>
                 <div>
@@ -88,6 +89,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                                  type="password"
                                  value={form.password}
                                  onChange={onChange}
+                                 required="required"
                     />
                 </div>
                 {type === 'signUp' && (
@@ -99,6 +101,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                                          type="password"
                                          value={form.checkPassword}
                                          onChange={onChange}
+                                         required="required"
                             />
                         </div>
                         <div>
@@ -107,6 +110,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                                          placeholder="이름"
                                          value={form.name}
                                          onChange={onChange}
+                                         required="required"
                             />
                         </div>
                         <div>
@@ -115,6 +119,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                                          placeholder="010 - XXXX - XXXX"
                                          value={form.phoneNumber}
                                          onChange={onChange}
+                                         required="required"
                             />
                         </div>
                         <div>
