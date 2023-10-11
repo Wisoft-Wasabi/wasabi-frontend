@@ -21,6 +21,15 @@ const SignUpForm = () => {
         );
     };
 
+    const onSelectPart = e => {
+        dispatch(changeField({
+                form: 'signUp',
+                key: 'part',
+                value: e.target.value,
+            }),
+        );
+    };
+
     const onSubmit = e => {
         e.preventDefault();
 
@@ -37,6 +46,7 @@ const SignUpForm = () => {
                   form={form}
                   onChange={onChange}
                   onSubmit={onSubmit}
+                  onSelectPart={onSelectPart}
         />
     );
 };
