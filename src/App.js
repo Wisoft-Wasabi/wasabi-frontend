@@ -6,18 +6,22 @@ import BoardPage from "./pages/BoardPage";
 import AdminPage from "./pages/AdminPage";
 import MyPageRoutes from "./routes/MyPageRoutes";
 import NotFound from "./components/base/NotFound";
+import SearchContainer from "./containers/search/SearchContainer";
 
 const App = () => {
     return (
-        <Routes>
-            <Route path="/" element={<BoardListPage/>}/>
-            <Route path="/auth/*" element={<AuthRoutes/>}/>
-            <Route path="/write" element={<WritePage/>}/>
-            <Route path="/boards/:boardId" element={<BoardPage/>}/>
-            <Route path="/mypage/*" element={<MyPageRoutes/>}/>
-            <Route path="/admin" element={<AdminPage/>}/>
-            <Route path="*" element={<NotFound/>}/>
-        </Routes>
+        <>
+            <SearchContainer/>
+            <Routes>
+                <Route path="/" element={<BoardListPage/>}/>
+                <Route path="/auth/*" element={<AuthRoutes/>}/>
+                <Route path="/write" element={<WritePage/>}/>
+                <Route path="/boards/:boardId" element={<BoardPage/>}/>
+                <Route path="/mypage/*" element={<MyPageRoutes/>}/>
+                <Route path="/admin" element={<AdminPage/>}/>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+        </>
     )
 };
 
