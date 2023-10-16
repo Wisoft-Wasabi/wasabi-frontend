@@ -8,28 +8,25 @@ const SelectBox = styled.select`
 
 `;
 
-const AllBoardList = ({boards, boardsError, keyword, search, searchError, boardListLoading, searchKeywordLoading, onSelectFilter, onChangeKeyword, onSearchKeyword, onNavigateDetail}) => {
+const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail}) => {
     if (boardsError) {
-        return <div>에러 발생!</div>
+        return <div>게시글 목록 조회 에러 발생!</div>
+    }
+
+    if (searchError) {
+        return <div>키워드 검색 조회 에러 발생!</div>
     }
 
     return (
         <>
-            <input name="keyword"
-                   value={keyword}
-                   placeholder="검색할 키워드를 입력하세요."
-                   onChange={e => onChangeKeyword(e)}
-                   onKeyUp={onSearchKeyword}
-            />
             <SelectBox onChange={e => onSelectFilter(e)}>
                 <option value="">== 정렬 기준 ==</option>
                 <option key="latest" value="latest">최신순</option>
                 <option key="likes" value="likes">좋아요순</option>
                 <option key="views" value="views">조회수순</option>
             </SelectBox>
-            {
-                search ? <BoardList boards={search} loading={searchKeywordLoading} onNavigateDetail={onNavigateDetail}/> :
-                    <BoardList boards={boards} loading={boardListLoading} onNavigateDetail={onNavigateDetail}/>
+            { search ? <BoardList boards={search} loading={searchLoading} onNavigateDetail={onNavigateDetail}/> :
+                <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail}/>
             }
         </>
     );
