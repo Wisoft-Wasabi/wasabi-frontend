@@ -1,7 +1,6 @@
 import Button from "../common/Button";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {useState} from "react";
 
 const AuthFormBlock = styled.div`
   align-items: center; /* 수직 중앙 정렬 */
@@ -56,17 +55,6 @@ const textMap = {
 }; // 객체
 
 const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedPart, setSelectedPart] = useState('직군');
-
-    const handleIsOpen = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const handleSelectedPart = part => {
-        setSelectedPart(part);
-    };
-
     const text = textMap[type];
 
     return (
@@ -132,18 +120,15 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                         </div>
                         <div>
                             <h3>직군</h3>
-                            <StyledSelect value={selectedPart} onClick={handleIsOpen} onChange={part => handleSelectedPart(part)}>
-                                {selectedPart}
+                            <StyledSelect onChange={e => onSelectPart(e)}>
+                                {['BackEnd', 'FrontEnd', 'Mobile', 'Infra', 'DBA', 'Developer'].map(part => (
+                                    <StyledOption name='part'
+                                                  key={part}
+                                                  value={part.toUpperCase()}>
+                                        {part}
+                                    </StyledOption>
+                                ))}
                             </StyledSelect>
-                            {isOpen && (['BackEnd', 'FrontEnd', 'Mobile', 'Infra', 'DBA', 'Developer'].map(part => (
-                                <StyledOption name="part"
-                                              key={part}
-                                              value={part.toUpperCase()}
-                                              onClick={onSelectPart}
-                                >
-                                    {part}
-                                </StyledOption>
-                            )))}
                         </div>
                         <div>
                             <h3>소속</h3>
