@@ -30,9 +30,7 @@ const SignUpForm = () => {
         );
     };
 
-    const onSubmit = e => {
-        e.preventDefault();
-
+    const onSubmit = () => {
         const {email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto} = form;
         dispatch(signUp({email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto}));
     };

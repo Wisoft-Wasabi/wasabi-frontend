@@ -24,9 +24,7 @@ const LoginForm = () => {
         );
     };
 
-    const onSubmit = e => {
-        e.preventDefault();
-
+    const onSubmit = () => {
         const {email, password} = form;
         dispatch(login({email, password}));
     };
