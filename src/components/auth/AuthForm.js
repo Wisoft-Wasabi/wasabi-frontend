@@ -1,6 +1,8 @@
 import Button from "../common/Button";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {useRef} from "react";
 
 const AuthFormBlock = styled.div`
   align-items: center; /* 수직 중앙 정렬 */
@@ -9,7 +11,7 @@ const AuthFormBlock = styled.div`
   margin-top: 200px;
 
   div {
-    margin-bottom: 30px;
+    margin-bottom: 4rem;
   }
 
   h3 {
@@ -19,17 +21,19 @@ const AuthFormBlock = styled.div`
 
 const StyledInput = styled.input`
   width: 100%;
+  height: 35px;
   border: 0.5px solid darkgrey;
   border-radius: 2.5px;
-  font-size: 1rem;
+  font-size: 1.215rem;
   padding: 0.25rem 0 0.25rem 0.1rem;
 `;
 
 const StyledSelect = styled.select`
   width: 100%;
+  height: 44px;
   border: 0.5px solid darkgrey;
   border-radius: 2.5px;
-  font-size: 1rem;
+  font-size: 1.215rem;
   padding: 0.25rem 0 0.25rem 0.1rem;
 `;
 
@@ -38,9 +42,14 @@ const StyledOption = styled.option`
   box-sizing: border-box;
   border: 0.5px solid darkgrey;
   border-radius: 2.5px;
-  font-size: 1rem;
+  font-size: 1.215rem;
   padding: 0.25rem 0 0.25rem 0.1rem;
   background-color: ${(props) => (props.selected ? '#4BC75F' : '#FFF')};
+`;
+
+const ErrorText = styled.p`
+  color: #EF616B;
+  margin-top: 0.2rem;
 `;
 
 const Footer = styled.div`
@@ -57,62 +66,107 @@ const textMap = {
 const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
     const text = textMap[type];
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: {errors}
+    }
+        = useForm();
+
+    const passwordRef = useRef(null);
+    passwordRef.current = watch('password');
+
     return (
         <AuthFormBlock>
             <h2>{text}</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3>이메일</h3>
-                    <StyledInput name="email"
+                    <StyledInput {...register("email",
+                        {
+                            required: '필수 입력 항목입니다.',
+                            pattern: {
+                                value: /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+                                message: '이메일 형식이 올바르지 않습니다.'
+                            }
+                        })}
                                  placeholder="이메일"
                                  value={form.email}
                                  onChange={onChange}
-                                 required="required"
                     />
+                    <ErrorText>{errors.email?.message}</ErrorText>
                 </div>
                 <div>
                     <h3>비밀번호</h3>
-                    <StyledInput name="password"
+                    <p style={{color: '#72757A', fontSize: '1rem', margin: '0.5rem 0'}}>영문, 숫자를 포함한 6자 이상의 비밀번호를
+                        입력하세요.</p>
+                    <StyledInput {...register("password",
+                        {
+                            required: '필수 입력 항목입니다.',
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
+                                message: '비밀번호는 영문, 숫자를 포함하여 6자 이이어야 합니다.'
+                            }
+                        })}
                                  placeholder="비밀번호"
                                  type="password"
                                  value={form.password}
                                  onChange={onChange}
-                                 required="required"
                     />
+                    <ErrorText>{errors.password?.message}</ErrorText>
                 </div>
                 {type === 'signUp' && (
                     <>
                         <div>
                             <h3>비밀번호 확인</h3>
-                            <StyledInput name="checkPassword"
+                            <StyledInput {...register("checkPassword",
+                                {
+                                    required: '필수 입력 항목입니다.',
+                                    validate: (value) => {
+                                        if (value === passwordRef.current) {
+                                            return null;
+                                        } else {
+                                            return '비밀번호가 일치하지 않습니다.';
+                                        }
+                                    }
+                                })}
                                          placeholder="비밀번호 확인"
                                          type="password"
                                          value={form.checkPassword}
                                          onChange={onChange}
-                                         required="required"
                             />
+                            <ErrorText>{errors.checkPassword?.message}</ErrorText>
                         </div>
                         <div>
                             <h3>이름</h3>
-                            <StyledInput name="name"
+                            <StyledInput {...register("name", {required: '필수 입력 항목입니다.'})}
                                          placeholder="이름"
                                          value={form.name}
                                          onChange={onChange}
-                                         required="required"
                             />
+                            <ErrorText>{errors.name?.message}</ErrorText>
                         </div>
                         <div>
                             <h3>전화번호</h3>
-                            <StyledInput name="phoneNumber"
-                                         placeholder="010 - XXXX - XXXX"
+                            <p style={{color: '#72757A', fontSize: '1rem', margin: '0.5rem 0'}}>'-'를 포함하여 입력하세요.</p>
+                            <StyledInput {...register("phoneNumber",
+                                {
+                                    required: '필수 입력 항목입니다.',
+                                    pattern: {
+                                        value: /^\d{3}-\d{3,4}-\d{4}$/,
+                                        message: '핸드폰 번호 형식이 올바르지 않습니다.'
+                                    }
+                                })}
+                                         placeholder="010-1234-5678"
                                          value={form.phoneNumber}
                                          onChange={onChange}
-                                         required="required"
                             />
+                            <ErrorText>{errors.phoneNumber?.message}</ErrorText>
                         </div>
                         <div>
                             <h3>URL</h3>
-                            <StyledInput name="referenceUrl"
+                            <StyledInput {...register("referenceUrl")}
                                          placeholder="URL"
                                          value={form.referenceUrl}
                                          onChange={onChange}
@@ -123,7 +177,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                             <StyledSelect onChange={e => onSelectPart(e)}>
                                 {['BackEnd', 'FrontEnd', 'Mobile', 'Infra', 'DBA', 'Developer'].map(part => (
                                     <StyledOption name='part'
-                                                  key={part}
+                                                  key={part.index}
                                                   value={part.toUpperCase()}>
                                         {part}
                                     </StyledOption>
@@ -148,7 +202,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                         </div>
                     </>
                 )}
-                <Button fullwidth="true">{text}</Button>
+                <Button fullwidth="true" style={{height: "40px"}}>{text}</Button>
             </form>
             <Footer>
                 {type === 'login' ? (
