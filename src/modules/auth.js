@@ -55,7 +55,7 @@ const initialState = {
         name: '',
         phoneNumber: '',
         referenceUrl: '',
-        part: '',
+        part: 'DEVELOPER',
         organization: '',
         motto: '',
     },

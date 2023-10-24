@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {useRef} from "react";
+import SignUpModal from "./SignUpModal";
 
 const AuthFormBlock = styled.div`
   align-items: center; /* 수직 중앙 정렬 */
@@ -20,7 +21,7 @@ const AuthFormBlock = styled.div`
 `;
 
 const StyledInput = styled.input`
-  width: 100%;
+  width: 350px;
   height: 35px;
   border: 0.5px solid darkgrey;
   border-radius: 2.5px;
@@ -30,7 +31,7 @@ const StyledInput = styled.input`
 
 const StyledSelect = styled.select`
   width: 100%;
-  height: 44px;
+  height: 44.33px;
   border: 0.5px solid darkgrey;
   border-radius: 2.5px;
   font-size: 1.215rem;
@@ -63,8 +64,39 @@ const textMap = {
     signUp: '회원가입',
 }; // 객체
 
-const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
+const AuthForm = ({type, form, onChange, onSubmit, onSelectPart, isOpenModal}) => {
     const text = textMap[type];
+
+    const partMap = [
+        {
+            name: '직군 선택',
+            value: 'DEVELOPER',
+        },
+        {
+            name: 'BackEnd',
+            value: 'BACKEND'
+        },
+        {
+            name: 'FrontEnd',
+            value: 'FRONTEND'
+        },
+        {
+            name: 'Mobile',
+            value: 'MOBILE'
+        },
+        {
+            name: 'Infra',
+            value: 'INFRA'
+        },
+        {
+            name: 'DBA',
+            value: 'DBA'
+        },
+        {
+            name: 'Developer',
+            value: 'DEVELOPER'
+        },
+    ];
 
     const {
         register,
@@ -80,6 +112,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
     return (
         <AuthFormBlock>
             <h2>{text}</h2>
+            {isOpenModal && <SignUpModal/>}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <h3>이메일</h3>
@@ -99,8 +132,9 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                 </div>
                 <div>
                     <h3>비밀번호</h3>
-                    <p style={{color: '#72757A', fontSize: '1rem', margin: '0.5rem 0'}}>영문, 숫자를 포함한 6자 이상의 비밀번호를
-                        입력하세요.</p>
+                    {type === 'signUp' ?
+                        <p style={{color: '#72757A', fontSize: '1rem', margin: '0.5rem 0'}}>영문, 숫자를 포함한 6자 이상의 비밀번호를
+                            입력하세요.</p> : null}
                     <StyledInput {...register("password",
                         {
                             required: '필수 입력 항목입니다.',
@@ -175,11 +209,12 @@ const AuthForm = ({type, form, onChange, onSubmit, onSelectPart}) => {
                         <div>
                             <h3>직군</h3>
                             <StyledSelect onChange={e => onSelectPart(e)}>
-                                {['BackEnd', 'FrontEnd', 'Mobile', 'Infra', 'DBA', 'Developer'].map(part => (
+                                {partMap.map(part => (
                                     <StyledOption name='part'
                                                   key={part.index}
-                                                  value={part.toUpperCase()}>
-                                        {part}
+                                                  value={part.value}
+                                                  disabled={part.disabled}>
+                                        {part.name}
                                     </StyledOption>
                                 ))}
                             </StyledSelect>
