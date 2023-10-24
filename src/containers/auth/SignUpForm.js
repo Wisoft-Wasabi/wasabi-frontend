@@ -1,9 +1,10 @@
 import AuthForm from "../../components/auth/AuthForm";
 import {useDispatch, useSelector} from "react-redux";
 import {changeField, initializeForm, signUp} from "../../modules/auth";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const SignUpForm = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false);
     const dispatch = useDispatch();
     const {form} = useSelector(({auth}) => ({
         form: auth.signUp,
@@ -33,6 +34,7 @@ const SignUpForm = () => {
     const onSubmit = () => {
         const {email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto} = form;
         dispatch(signUp({email, password, checkPassword, name, phoneNumber, referenceUrl, part, organization, motto}));
+        setIsOpenModal(!isOpenModal);
     };
 
     useEffect(() => {
@@ -45,6 +47,7 @@ const SignUpForm = () => {
                   onChange={onChange}
                   onSubmit={onSubmit}
                   onSelectPart={onSelectPart}
+                  isOpenModal={isOpenModal}
         />
     );
 };

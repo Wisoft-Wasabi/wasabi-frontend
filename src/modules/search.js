@@ -3,11 +3,13 @@ import {createAction, handleActions} from "redux-actions";
 import * as searchAPI from "../lib/api/search";
 import {takeLatest} from "redux-saga/effects";
 
+const INITIALIZE_SEARCH = 'search/INITIALIZE_SEARCH';
 const CHANGE_FIELD = 'search/CHANGE_FIELD';
 const [SEARCH_KEYWORD, SEARCH_KEYWORD_SUCCESS, SEARCH_KEYWORD_FAILURE]= createRequestActionTypes(
     'search/SEARCH_KEYWORD',
 );
 
+export const initializeSearch = createAction(INITIALIZE_SEARCH);
 export const changeField = createAction(
     CHANGE_FIELD,
     ({key, value}) => ({key, value}),
@@ -32,6 +34,7 @@ const initialState = {
 
 const search = handleActions(
     {
+        [INITIALIZE_SEARCH]: state => initialState,
         [CHANGE_FIELD]: (state, {payload: {key, value}}) => ({
             ...state,
             [key]: value,
