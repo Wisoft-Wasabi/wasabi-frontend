@@ -2,7 +2,7 @@ import {useTable} from "react-table";
 
 // const TableSheet = styled.div``;
 // const TableHead = styled.div``;
-// const Header = styled.div``;
+// const MainHeader = styled.div``;
 // const ThCell = styled.div``;
 // const TdCell = styled.div``;
 

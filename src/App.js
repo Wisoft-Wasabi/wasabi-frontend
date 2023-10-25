@@ -4,21 +4,35 @@ import AuthRoutes from "./routes/AuthRoutes";
 import WritePage from "./pages/WritePage";
 import BoardPage from "./pages/BoardPage";
 import AdminPage from "./pages/AdminPage";
-import MyPageRoutes from "./routes/MyPageRoutes";
 import NotFound from "./components/base/NotFound";
-import SearchContainer from "./containers/search/SearchContainer";
+import AuthLayout from "./components/layout/AuthLayout";
+import MainLayout from "./components/layout/MainLayout";
+import MyLikePage from "./pages/MyLikePage";
+import MyBoardPage from "./pages/MyBoardPage";
+import SubLayout from "./components/layout/SubLayout";
+import ProfilePage from "./pages/ProfilePage";
+import EtcLayout from "./components/layout/EtcLayout";
 
 const App = () => {
     return (
         <>
-            <SearchContainer/>
             <Routes>
-                <Route path="/" element={<BoardListPage/>}/>
-                <Route path="/auth/*" element={<AuthRoutes/>}/>
-                <Route path="/write" element={<WritePage/>}/>
-                <Route path="/boards/:boardId" element={<BoardPage/>}/>
-                <Route path="/mypage/*" element={<MyPageRoutes/>}/>
-                <Route path="/admin" element={<AdminPage/>}/>
+                <Route element={<MainLayout/>}>
+                    <Route path="/" element={<BoardListPage/>}/>
+                    <Route path="/mypage/boards" element={<MyBoardPage/>}/>
+                    <Route path="/mypage/likes" element={<MyLikePage/>}/>
+                </Route>
+                <Route element={<AuthLayout/>}>
+                    <Route path="/auth/*" element={<AuthRoutes/>}/>
+                </Route>
+                <Route element={<SubLayout/>}>
+                    <Route path="/boards/:boardId" element={<BoardPage/>}/>
+                    <Route path="/mypage/profile" element={<ProfilePage/>}/>
+                </Route>
+                <Route element={<EtcLayout/>}>
+                    <Route path="/write" element={<WritePage/>}/>
+                    <Route path="/admin" element={<AdminPage/>}/>
+                </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </>

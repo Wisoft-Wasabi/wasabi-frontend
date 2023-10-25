@@ -2,8 +2,10 @@ import WriteButton from "../../components/write/WriteButton";
 import {useDispatch, useSelector} from "react-redux";
 import {writeBoard} from "../../modules/write";
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const WriteButtonContainer = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const {title, content, tag, board, boardError} = useSelector(({write}) => ({
         title: write.title,
@@ -20,6 +22,7 @@ const WriteButtonContainer = () => {
                 tag,
             }),
         );
+        navigate('/');
     };
 
     useEffect(() => {
