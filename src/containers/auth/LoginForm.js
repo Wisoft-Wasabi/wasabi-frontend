@@ -30,6 +30,7 @@ const LoginForm = () => {
         const {email, password} = form;
         dispatch(login({email, password}));
         dispatch(initializeForm('login'));
+        navigate('/');
     };
 
     useEffect(() => {
@@ -41,7 +42,6 @@ const LoginForm = () => {
             try {
                 localStorage.setItem('member', JSON.stringify(auth));
                 client.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
-                navigate('/');
             } catch (e) {
                 console.log('localStorage is not working.');
             }

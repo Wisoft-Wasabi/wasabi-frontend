@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {changeField, searchKeyword} from "../../modules/search";
 import {useCallback} from "react";
-import Header from "../../components/base/Header";
+import MainHeader from "../../components/base/MainHeader";
 
 const SearchContainer = () => {
     const dispatch = useDispatch();
@@ -30,12 +30,12 @@ const SearchContainer = () => {
     );
 
     return (
-        <Header keyword={keyword}
-                search={search}
-                searchError={searchError}
-                searchLoading={searchLoading}
-                onChangeKeyword={onChangeKeyword}
-                onSearchKeyword={onSearchKeyword}
+        <MainHeader keyword={keyword}
+                    search={search}
+                    searchError={searchError}
+                    searchLoading={searchLoading}
+                    onChangeKeyword={onChangeKeyword}
+                    onSearchKeyword={onSearchKeyword}
         />
     );
 };
