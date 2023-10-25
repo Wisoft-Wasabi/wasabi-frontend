@@ -32,7 +32,7 @@ const SubHeader = () => {
         <SubHeaderBlock>
             <Link className='logo' to='/'>Wasabi</Link>
             {member && member.data ? <><Link className='nav' to='/write'>글쓰기</Link><Link className='nav' to=''><span style={{color: '#4BC75F'}}>{member.data.name}</span>님</Link></>
-                : <Link className='logo' to='/'>Wasabi</Link>
+                : <Link className='nav' to='/auth/login'>로그인</Link>
             }
         </SubHeaderBlock>
     );
