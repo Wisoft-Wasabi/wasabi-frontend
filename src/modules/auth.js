@@ -3,6 +3,7 @@ import {produce} from "immer";
 import createRequestSaga, {createRequestActionTypes} from "../lib/createRequestSaga";
 import * as authAPI from "../lib/api/auth";
 import {takeLatest} from "redux-saga/effects";
+import client from "../lib/api/client";
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
@@ -82,11 +83,18 @@ const auth = handleActions(
             ...state,
             authError: error
         }),
-        [LOGIN_SUCCESS]: (state, {payload: auth}) => ({
-            ...state,
-            auth,
-            authError: null,
-        }),
+        [LOGIN_SUCCESS]: (state, {payload: auth}) => {
+            try {
+                localStorage.setItem('member', JSON.stringify(auth));
+                client.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
+            } catch (e) {
+                console.log('localStorage is not working.');
+            }
+            return {
+                ...state,
+                auth,
+            }
+        },
         [LOGIN_FAILURE]: (state, {payload: error}) => ({
             ...state,
             authError: error
