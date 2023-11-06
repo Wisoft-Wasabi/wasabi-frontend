@@ -1,4 +1,4 @@
-import SubHeader from "../base/SubHeader";
+import SubHeader from "../base/header/SubHeader";
 import {Outlet} from "react-router-dom";
 
 const SubLayout = () => {

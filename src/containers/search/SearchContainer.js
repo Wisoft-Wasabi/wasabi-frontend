@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {changeField, searchKeyword} from "../../modules/search";
 import {useCallback} from "react";
-import MainHeader from "../../components/base/MainHeader";
+import MainHeader from "../../components/base/header/MainHeader";
 
 const SearchContainer = () => {
     const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import AuthHeader from "../base/AuthHeader";
+import AuthHeader from "../base/header/AuthHeader";
 import {Outlet} from "react-router-dom";
 
 const AuthLayout = () => {
