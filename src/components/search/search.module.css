@@ -1,0 +1,27 @@
+.searchBox {
+    width: 60%;
+    height: 64px;
+    border: 1px solid #222529;
+    border-radius: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1.2rem;
+}
+
+.searchIcon {
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.input {
+    width: 90%;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.input:focus {
+    outline: none;
+}
