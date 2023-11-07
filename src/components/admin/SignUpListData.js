@@ -8,7 +8,6 @@ const SignUpListData = ({signUpList, signUpListError, onAccept, acceptLoading}) 
     useEffect(() => {
         if (signUpList && signUpList.data) {
             setOriginSignUpList(signUpList.data.content);
-            console.log(originSignUpList);
         }
     }, [signUpList, originSignUpList])
 

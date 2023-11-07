@@ -1,8 +1,11 @@
 import LoginForm from "../containers/auth/LoginForm";
+import UnProtectedRoute from "../routes/UnProtectedRoute";
 
 const LoginPage = () => {
     return (
-        <LoginForm/>
+        <UnProtectedRoute>
+            <LoginForm/>
+        </UnProtectedRoute>
     );
 };
 

@@ -1,8 +1,11 @@
 import SignUpListDataContainer from "../containers/admin/SignUpListDataContainer";
+import ProtectedRoute from "../routes/ProtectedRoute";
 
 const AdminPage = () => {
     return (
-        <SignUpListDataContainer/>
+        <ProtectedRoute>
+            <SignUpListDataContainer/>
+        </ProtectedRoute>
     );
 };
 
