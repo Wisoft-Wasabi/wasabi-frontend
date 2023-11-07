@@ -4,11 +4,11 @@ import WriteButtonContainer from "../containers/write/WriteButtonContainer";
 
 const WritePage = () => {
     return (
-        <div>
+        <>
             <EditorContainer/>
             <TagBoxContainer/>
             <WriteButtonContainer/>
-        </div>
+        </>
     );
 };
 

@@ -10,12 +10,13 @@ import MainLayout from "./components/layout/MainLayout";
 import MyLikePage from "./pages/MyLikePage";
 import MyBoardPage from "./pages/MyBoardPage";
 import SubLayout from "./components/layout/SubLayout";
-import ProfilePage from "./pages/ProfilePage";
+import MyProfilePage from "./pages/MyProfilePage";
 import EtcLayout from "./components/layout/EtcLayout";
+import {AuthContextProvider} from "./context/AuthContext";
 
 const App = () => {
     return (
-        <>
+        <AuthContextProvider>
             <Routes>
                 <Route element={<MainLayout/>}>
                     <Route path="/" element={<BoardListPage/>}/>
@@ -27,7 +28,7 @@ const App = () => {
                 </Route>
                 <Route element={<SubLayout/>}>
                     <Route path="/boards/:boardId" element={<BoardPage/>}/>
-                    <Route path="/mypage/profile" element={<ProfilePage/>}/>
+                    <Route path="/mypage/profile" element={<MyProfilePage/>}/>
                 </Route>
                 <Route element={<EtcLayout/>}>
                     <Route path="/write" element={<WritePage/>}/>
@@ -35,8 +36,8 @@ const App = () => {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
-        </>
-    )
+        </AuthContextProvider>
+    );
 };
 
 export default App;

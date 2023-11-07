@@ -59,53 +59,45 @@ const Footer = styled.div`
   font-size: 0.7rem;
 `;
 
-const textMap = {
+const textMap = {  // 객체
     login: '로그인', // 프로퍼티
     signUp: '회원가입',
-}; // 객체
+};
+
+const partMap = [
+    {
+        name: '직군 선택',
+        value: 'DEVELOPER',
+    },
+    {
+        name: 'BackEnd',
+        value: 'BACKEND'
+    },
+    {
+        name: 'FrontEnd',
+        value: 'FRONTEND'
+    },
+    {
+        name: 'Mobile',
+        value: 'MOBILE'
+    },
+    {
+        name: 'Infra',
+        value: 'INFRA'
+    },
+    {
+        name: 'DBA',
+        value: 'DBA'
+    },
+    {
+        name: 'Developer',
+        value: 'DEVELOPER'
+    },
+];
 
 const AuthForm = ({type, form, onChange, onSubmit, onSelectPart, isOpenModal}) => {
     const text = textMap[type];
-
-    const partMap = [
-        {
-            name: '직군 선택',
-            value: 'DEVELOPER',
-        },
-        {
-            name: 'BackEnd',
-            value: 'BACKEND'
-        },
-        {
-            name: 'FrontEnd',
-            value: 'FRONTEND'
-        },
-        {
-            name: 'Mobile',
-            value: 'MOBILE'
-        },
-        {
-            name: 'Infra',
-            value: 'INFRA'
-        },
-        {
-            name: 'DBA',
-            value: 'DBA'
-        },
-        {
-            name: 'Developer',
-            value: 'DEVELOPER'
-        },
-    ];
-
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: {errors}
-    }
-        = useForm();
-
+    const {register, handleSubmit, watch, formState: {errors}} = useForm();
     const passwordRef = useRef(null);
     passwordRef.current = watch('password');
 
