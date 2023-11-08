@@ -1,0 +1,12 @@
+.allBoardListBox {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem 10rem;
+}
+
+.select {
+    width: 120px;
+    height: 50px;
+    font-size: 1.25rem;
+    line-height: 2rem;
+}

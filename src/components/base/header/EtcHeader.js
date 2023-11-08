@@ -3,7 +3,8 @@ import styles from "./header.module.css";
 import {SiAppwrite} from "react-icons/si";
 
 const EtcHeader = () => {
-    const member = JSON.parse(localStorage.getItem('member'));
+    const member  = JSON.parse(localStorage.getItem('member'));
+    // const member = useAuthContext(); // Context에서 사용자 정보 가져와 사용하기
 
     return (
         <header className={styles.headerBox}>
@@ -12,12 +13,15 @@ const EtcHeader = () => {
                 Wasabi
             </Link>
             <nav className={styles.nav}>
-                <Link className={styles.link} to=''>
+                {member && member.data ?
+                    <Link className={styles.link} to=''>
                     <span className={styles.member}>
                         {member.data.name}
                     </span>
-                    님
-                </Link>
+                        님
+                    </Link>
+                    : null
+                }
             </nav>
         </header>
     );

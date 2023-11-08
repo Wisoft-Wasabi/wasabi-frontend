@@ -3,7 +3,8 @@ import styles from "./header.module.css";
 import {SiAppwrite} from "react-icons/si";
 
 const SubHeader = () => {
-    const member = JSON.parse(localStorage.getItem('member'));
+    const member  = JSON.parse(localStorage.getItem('member'));
+    // const member = useAuthContext(); // Context에서 사용자 정보 가져와 사용하기
 
     return (
         <header className={styles.headerBox}>
