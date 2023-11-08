@@ -1,0 +1,85 @@
+.boardListBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.boardCardBox {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    height: 32rem;
+    border: none;
+    border-radius: 14px;
+    background-color: #FAFAFA;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    margin: 1rem;
+}
+
+.boardCardBox:hover {
+    cursor: pointer;
+    transform: translateY(-15px);
+    transition: transform 0.2s ease-in-out;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 45%;
+}
+
+.subInfo {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #CED1D7;
+    padding: 1.5rem 2rem;
+}
+
+.writerBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+
+.writer {
+    margin: 0 0 0 0.4rem;
+}
+
+.title {
+    margin: 0 0 5rem 0;
+}
+
+.date {
+    margin: 0;
+    color: #6B6B6B;
+}
+
+.countBox {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 2rem;
+}
+
+.countInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+}
+
+.count {
+    margin: 0 0 0 0.4rem;
+}
+
+.error {
+    display: flex;
+    margin-top: 5rem;
+    font-size: 3rem;
+    line-height: 1;
+}

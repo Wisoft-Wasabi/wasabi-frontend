@@ -4,7 +4,8 @@ import {SiAppwrite} from "react-icons/si";
 import styles from "./header.module.css";
 
 const MainHeader = ({keyword, search, searchError, searchLoading, onChangeKeyword, onSearchKeyword, onNavigateDetail}) => {
-    const member = JSON.parse(localStorage.getItem('member'));
+    const member  = JSON.parse(localStorage.getItem('member'));
+    // const member = useAuthContext(); // Context에서 사용자 정보 가져와 사용하기
 
     return (
         <header className={styles.headerBox}>

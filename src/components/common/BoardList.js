@@ -1,94 +1,35 @@
-import ThumbNail from "../../assets/thumbNail.jpg";
-import FillLike from "../../assets/fill.png";
-import {BiShow} from "react-icons/bi";
-import styled from "styled-components";
+import ThumbNail from "../../assets/thumbnail.jpg";
+import {IoPersonCircleSharp} from "react-icons/io5";
+import {AiOutlineHeart} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
-
-const BoardListBlock = styled.div`
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin: 0 auto;
-  margin-top: 3rem;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-
-const BoardCardBlock = styled.div`
-  width: 320px;
-  height: 360px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  flex-grow: 0;
-  max-width: 100%;
-  background-color: #fff;
-  box-shadow: 0 5px 10px 5px #f2f5f7;
-  border-radius: 10px;
-  border: 1px solid #f2f5f7;
-  overflow: hidden;
-  margin: 3rem 1.5rem;
-  cursor: pointer;
-
-  h2 {
-    font-size: 2rem;
-    margin: 0.5rem 0;
-    padding-left: 0.6rem;
-  }
-`;
-
-const BoardImage = styled.img`
-  position: relative;
-  width: 100%;
-  height: 56.25%;
-  object-fit: cover;
-`;
-
-const SubInfo = styled.div`
-  padding-left: 0.6rem;
-
-  span + span:before {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    content: '\\B7';
-  }
-`;
-
-const CountInfo = styled.div`
-  padding-left: 0.6rem;
-  margin-top: 2.5rem;
-
-  span + span {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
-`;
-
-const LikeImage = styled.img`
-  width: 18px;
-  height: 18px;
-  object-fit: cover;
-`;
+import styles from "./boardList.module.css";
+import {GrLineChart} from "react-icons/gr";
 
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
 
     return (
-        <BoardCardBlock onClick={onNavigateDetail}>
-            <BoardImage src={ThumbNail}/>
-            <h2><b>{title}</b></h2>
-            <SubInfo>
-                <span>{writer}</span>
-                <span>{new Date(createdAt).toLocaleString()}</span>
-            </SubInfo>
-            <CountInfo>
-                <span><LikeImage src={FillLike}/>{likeCount}</span>
-                <span><BiShow/>{views}</span>
-            </CountInfo>
-        </BoardCardBlock>
+        <div className={styles.boardCardBox} onClick={onNavigateDetail}>
+            <img className={styles.thumbnail} src={ThumbNail} alt='ThumbNail'/>
+            <div className={styles.subInfo}>
+                <div className={styles.writerBox}>
+                    <IoPersonCircleSharp/>
+                    <p className={styles.writer}>{writer}</p>
+                </div>
+                <h2 className={styles.title}>{title}</h2>
+                <p className={styles.date}>{new Date(createdAt).toLocaleString()}</p>
+            </div>
+            <div className={styles.countBox}>
+                <span className={styles.countInfo}>
+                    <AiOutlineHeart/>
+                    <p className={styles.count}>{likeCount}</p>
+                </span>
+                <span className={styles.countInfo}>
+                    <GrLineChart/>
+                    <p className={styles.count}>{views}</p>
+                </span>
+            </div>
+        </div>
     );
 };
 
@@ -99,15 +40,21 @@ const BoardList = ({boards, loading}) => {
     };
 
     return (
-        <BoardListBlock>
+        <>
             {!loading && boards && (
-                <div style={{display: "flex"}}>
-                    {boards.data.content.map(board => (
-                        <BoardCard board={board} key={board.id} onNavigateDetail={() => onNavigateDetail(board.id)}/>
-                    ))}
-                </div>
+                <>
+                    {boards.data.content.length !== 0 ?
+                        <div className={styles.boardListBox}>
+                            {boards.data.content.map(board => (
+                                <BoardCard board={board} key={board.id}
+                                           onNavigateDetail={() => onNavigateDetail(board.id)}/>
+                            ))}
+                        </div>
+                        : <div className={styles.error}>관련 게시글이 없습니다.</div>
+                    }
+                </>
             )}
-        </BoardListBlock>
+        </>
     );
 };
 
