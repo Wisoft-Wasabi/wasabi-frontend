@@ -17,11 +17,11 @@ const LoginForm = () => {
         const {name, value} = e.target;
 
         dispatch(
-            changeField({
-                form: 'login',
-                key: name,
-                value,
-            })
+          changeField({
+              form: 'login',
+              key: name,
+              value,
+          })
         );
     };
 
@@ -40,6 +40,11 @@ const LoginForm = () => {
         }
     }
     */
+    const onKeyPress = e => {
+        if (e.key === 'Enter') {
+            onSubmit(); // Enter 입력이 되면 Submit 실행
+        }
+    }
 
     const onSubmit = () => {
         const {email, password} = form;
@@ -53,11 +58,12 @@ const LoginForm = () => {
     }, [dispatch]);
 
     return (
-        <AuthForm type="login"
-                  form={form}
-                  onChange={onChange}
-                  onSubmit={onSubmit}
-        />
+      <AuthForm type="login"
+                form={form}
+                onChange={onChange}
+                onSubmit={onSubmit}
+                onKeyPress={onKeyPress}
+      />
     );
 };
 
