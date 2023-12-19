@@ -7,12 +7,13 @@ import {useNavigate} from "react-router-dom";
 const WriteButtonContainer = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {title, content, tag, board, boardError} = useSelector(({write}) => ({
+    const {title, content, tag, board, boardError, loading} = useSelector(({write, loading}) => ({
         title: write.title,
         content: write.content,
         tag: write.tag,
         board: write.board,
         boardError: write.boardError,
+        loading: loading['write/WRITE_BOARD'],
     }));
 
     const onPublish = () => {
@@ -22,15 +23,17 @@ const WriteButtonContainer = () => {
                 tag,
             }),
         );
-        navigate('/');
     };
 
     useEffect(() => {
-            if (board) console.log('게시글 작성 성공');
-            if (boardError) console.log(boardError);
-        },
-        [board, boardError],
-    );
+        if (!loading && board) {
+            navigate('/');
+        }
+
+        if (!loading && boardError) {
+            alert('Fail to write board.');
+        }
+    }, [loading]);
 
     return (
         <WriteButton onPublish={onPublish}/>
