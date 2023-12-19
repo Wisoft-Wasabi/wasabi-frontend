@@ -7,7 +7,7 @@ const [BOARD_LIST, BOARD_LIST_SUCCESS, BOARD_LIST_FAILURE] = createRequestAction
 
 export const boardList = createAction(
     BOARD_LIST,
-    condition => condition,
+    ({page, condition}) => ({page, condition}),
 );
 
 // 사가 생성

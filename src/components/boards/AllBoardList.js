@@ -1,7 +1,7 @@
 import BoardList from "../common/BoardList";
 import styles from "./allBoardList.module.css";
 
-const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail}) => {
+const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail, handlePage}) => {
     if (boardsError) {
         return <div>게시글 목록 조회 에러 발생!</div>
     }
@@ -19,7 +19,7 @@ const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, 
                 <option key="views" value="views">조회수순</option>
             </select>
             { search ? <BoardList boards={search} loading={searchLoading} onNavigateDetail={onNavigateDetail}/> :
-                <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail}/>
+                <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail} handlePage={handlePage}/>
             }
         </div>
     );

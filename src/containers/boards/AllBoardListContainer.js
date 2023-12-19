@@ -1,10 +1,11 @@
 import AllBoardList from "../../components/boards/AllBoardList";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {boardList} from "../../modules/boards";
 import {useSearchParams} from "react-router-dom";
 
 const AllBoardListContainer = () => {
+    const [page, setPage] = useState(0);
     const [searchParams] = useSearchParams();
     const condition = searchParams.get('sortBy');
     const dispatch = useDispatch();
@@ -17,14 +18,18 @@ const AllBoardListContainer = () => {
         searchLoading: loading['search/SEARCH_KEYWORD'],
     }));
 
-    useEffect(() => {
-        dispatch(boardList(condition));
-    }, [dispatch, condition]);
-
     const onSelectFilter = e => {
         const value = e.target.options[e.target.selectedIndex].value;
-        dispatch(boardList(value));
+        dispatch(boardList({page: 0, condition: value}));
     };
+
+    const handlePage = () => {
+        setPage(prev => prev + 1);
+    };
+
+    useEffect(() => {
+        dispatch(boardList({page: page, condition: condition}));
+    }, [page]);
 
     return (
         <AllBoardList boards={boards}
@@ -34,6 +39,7 @@ const AllBoardListContainer = () => {
                       searchError={searchError}
                       searchLoading={searchLoading}
                       onSelectFilter={onSelectFilter}
+                      handlePage={handlePage}
         />
     );
 };

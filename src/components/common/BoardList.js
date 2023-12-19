@@ -4,6 +4,7 @@ import {AiOutlineHeart} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import styles from "./boardList.module.css";
 import {GrLineChart} from "react-icons/gr";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
@@ -33,8 +34,9 @@ const BoardCard = ({board, onNavigateDetail}) => {
     );
 };
 
-const BoardList = ({boards, loading}) => {
+const BoardList = ({boards, loading, handlePage}) => {
     const navigate = useNavigate();
+
     const onNavigateDetail = (boardId) => {
         navigate(`/boards/${boardId}`);
     };
@@ -43,15 +45,22 @@ const BoardList = ({boards, loading}) => {
         <>
             {!loading && boards && (
                 <>
-                    {boards.data.content.length !== 0 ?
-                        <div className={styles.boardListBox}>
-                            {boards.data.content.map(board => (
-                                <BoardCard board={board} key={board.id}
-                                           onNavigateDetail={() => onNavigateDetail(board.id)}/>
-                            ))}
-                        </div>
-                        : <div className={styles.error}>관련 게시글이 없습니다.</div>
-                    }
+                    <InfiniteScroll dataLength={6}
+                                    next={handlePage}
+                                    hasMore={true}
+                    >
+                        {boards.data.content.length !== 0 ?
+                            <div className={styles.boardListBox}>
+                                {boards.data.content.map(board => (
+                                    <BoardCard board={board}
+                                               key={board.id}
+                                               onNavigateDetail={() => onNavigateDetail(board.id)}
+                                    />
+                                ))}
+                            </div>
+                            : <div className={styles.error}>관련 게시글이 없습니다.</div>
+                        }
+                    </InfiniteScroll>
                 </>
             )}
         </>
