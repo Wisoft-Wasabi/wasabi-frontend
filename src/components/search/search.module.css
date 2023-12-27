@@ -1,7 +1,7 @@
 .searchBox {
     width: 60%;
     height: 64px;
-    border: 1px solid #222529;
+    border: 0.7px solid #9d9d9d;
     border-radius: 4rem;
     display: flex;
     flex-direction: row;
