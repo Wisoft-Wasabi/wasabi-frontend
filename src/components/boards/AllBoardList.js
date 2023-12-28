@@ -1,7 +1,7 @@
 import BoardList from "../common/BoardList";
 import styles from "./allBoardList.module.css";
 
-const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail, handlePage}) => {
+const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail}) => {
     if (boardsError) {
         return <div>게시글 목록 조회 에러 발생!</div>
     }
@@ -11,17 +11,17 @@ const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, 
     }
 
     return (
-      <div className={styles.allBoardListBox}>
-          <select className={styles.select} onChange={e => onSelectFilter(e)}>
-              <option value="">정렬 기준</option>
-              <option key="latest" value="latest">최신순</option>
-              <option key="likes" value="likes">좋아요순</option>
-              <option key="views" value="views">조회수순</option>
-          </select>
-          { search ? <BoardList boards={search} loading={searchLoading} onNavigateDetail={onNavigateDetail}/> :
-            <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail} handlePage={handlePage}/>
-          }
-      </div>
+        <div className={styles.allBoardListBox}>
+            <select className={styles.select} onChange={e => onSelectFilter(e)}>
+                <option value="">정렬 기준</option>
+                <option key="latest" value="latest">최신순</option>
+                <option key="likes" value="likes">좋아요순</option>
+                <option key="views" value="views">조회수순</option>
+            </select>
+            { search ? <BoardList boards={search} loading={searchLoading} onNavigateDetail={onNavigateDetail}/> :
+                <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail}/>
+            }
+        </div>
     );
 };
 

@@ -2,8 +2,8 @@ import ThumbNail from "../../assets/thumbnail.jpg";
 import {AiOutlineHeart} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import {GrLineChart} from "react-icons/gr";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { GoPencil } from "react-icons/go";
+import InfiniteScroll from "./InfiniteScroll";
 
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
@@ -37,7 +37,7 @@ const BoardCard = ({board, onNavigateDetail}) => {
     );
 };
 
-const BoardList = ({boards, loading, handlePage}) => {
+const BoardList = ({boards, loading}) => {
     const navigate = useNavigate();
 
     const onNavigateDetail = (boardId) => {
@@ -48,13 +48,9 @@ const BoardList = ({boards, loading, handlePage}) => {
       <>
           {!loading && boards && (
           <>
-              <InfiniteScroll dataLength={6}
-                              next={handlePage}
-                              hasMore={true}
-              >
-                  {boards.data.content.length !== 0 ?
+                  {boards.length !== 0 ?
                   <div className='grid grid-cols-3 grid-rows-2 gap-12 mt-12'>
-                      {boards.data.content.map(board => (
+                      {boards.map(board => (
                       <BoardCard
                         board={board}
                         key={board.id}
@@ -64,10 +60,10 @@ const BoardList = ({boards, loading, handlePage}) => {
                   </div>
                   : <div className='flex mt-20 font-5xl'>관련 게시글이 없습니다.</div>
                   }
-              </InfiniteScroll>
           </>
           )}
       </>
+
     );
 };
 
