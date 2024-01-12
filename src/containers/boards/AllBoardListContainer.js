@@ -50,7 +50,7 @@ const AllBoardListContainer = () => {
 
     return (
         <>
-            <AllBoardList boards={allBoards}
+            <AllBoardList boards={boards}
                           boardsError={boardsError}
                           boardsLoading={boardsLoading}
                           search={search}
@@ -58,6 +58,7 @@ const AllBoardListContainer = () => {
                           searchLoading={searchLoading}
                           onSelectFilter={onSelectFilter}
                           onIntersect={handlePage}
+                          boardsList={allBoards}
             />
             {!boardsLoading && boards && (
                 <InfiniteScroll onIntersect={handlePage} />

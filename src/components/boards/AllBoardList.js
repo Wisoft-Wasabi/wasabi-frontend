@@ -1,10 +1,9 @@
 import BoardList from "../common/BoardList";
 
-const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail,}) => {
+const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, searchLoading, onSelectFilter, onNavigateDetail, boardsList}) => {
   if (boardsError) {
-      return <div>게시글 목록 조회 에러 발생!</div>
+    return <div>게시글 목록 조회 에러 발생!</div>
   }
-
 
   if (searchError) {
     return <div>키워드 검색 조회 에러 발생!</div>;
@@ -19,7 +18,7 @@ const AllBoardList = ({boards, boardsError, boardsLoading, search, searchError, 
         <option key="views" value="views">조회수순</option>
       </select>
       {search ? <BoardList boards={search} loading={searchLoading} onNavigateDetail={onNavigateDetail}/> :
-        <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail}/>
+        <BoardList boards={boards} loading={boardsLoading} onNavigateDetail={onNavigateDetail} boardsList={boardsList}/>
       }
     </div>
   );

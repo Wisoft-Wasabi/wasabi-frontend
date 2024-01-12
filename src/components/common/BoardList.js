@@ -1,8 +1,8 @@
 import ThumbNail from "../../assets/thumbnail.jpg";
 import {AiOutlineHeart} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
+import {GoPencil} from "react-icons/go";
 import { FaRegEye } from "react-icons/fa";
-
 
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views, body} = board;
@@ -34,7 +34,7 @@ const BoardCard = ({board, onNavigateDetail}) => {
     );
 };
 
-const BoardList = ({boards, loading}) => {
+const BoardList = ({boards, loading, boardsList}) => {
     const navigate = useNavigate();
 
     const onNavigateDetail = (boardId) => {
@@ -44,10 +44,9 @@ const BoardList = ({boards, loading}) => {
     return (
       <>
           {!loading && boards && (
-          <>
-                  {boards.length !== 0 ?
+                  boardsList.length !== 0 ?
                   <div className='xl:grid xl:grid-cols-3 xl:grid-rows-2 xl:gap-12 xl:mt-12  md:grid md:grid-cols-2 md:grid-rows-2 md:gap-12 md:mt-12  grid grid-cols-1 gap-12 mt-12'>
-                      {boards.map(board => (
+                      {boardsList.map(board => (
                       <BoardCard
                         board={board}
                         key={board.id}
@@ -56,11 +55,8 @@ const BoardList = ({boards, loading}) => {
                       ))}
                   </div>
                   : <div className='flex mt-20 font-5xl'>관련 게시글이 없습니다.</div>
-                  }
-          </>
           )}
       </>
-
     );
 };
 
