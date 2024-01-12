@@ -2,8 +2,7 @@ import ThumbNail from "../../assets/thumbnail.jpg";
 import {AiOutlineHeart} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import {GrLineChart} from "react-icons/gr";
-import { GoPencil } from "react-icons/go";
-import InfiniteScroll from "./InfiniteScroll";
+import {GoPencil} from "react-icons/go";
 
 const BoardCard = ({board, onNavigateDetail}) => {
     const {title, writer, createdAt, likeCount, views} = board;
@@ -37,7 +36,7 @@ const BoardCard = ({board, onNavigateDetail}) => {
     );
 };
 
-const BoardList = ({boards, loading}) => {
+const BoardList = ({boards, loading, boardsList}) => {
     const navigate = useNavigate();
 
     const onNavigateDetail = (boardId) => {
@@ -47,20 +46,18 @@ const BoardList = ({boards, loading}) => {
     return (
       <>
           {!loading && boards && (
-          <>
-                  {boards.length !== 0 ?
-                  <div className='grid grid-cols-3 grid-rows-2 gap-12 mt-12'>
-                      {boards.map(board => (
-                      <BoardCard
-                        board={board}
-                        key={board.id}
-                        onNavigateDetail={() => onNavigateDetail(board.id)}
-                      />
-                      ))}
-                  </div>
-                  : <div className='flex mt-20 font-5xl'>관련 게시글이 없습니다.</div>
-                  }
-          </>
+              boardsList.length !== 0 ?
+                      <div className='grid grid-cols-3 grid-rows-2 gap-12 mt-12'>
+                          {boardsList.map(board => (
+                                  <BoardCard
+                                      board={board}
+                                      key={board.id}
+                                      onNavigateDetail={() => onNavigateDetail(board.id)}
+                                  />
+                          ))}
+                      </div>
+                      : <div className='flex mt-20 font-5xl'>관련 게시글이 없습니다.</div>
+
           )}
       </>
 
