@@ -18,7 +18,7 @@ export const writeComment = createAction(
 )
 
 // 사가 생성
-const writeCommentSaga = createRequestSaga(WRTIE_COMMENT, commentAPI.writeComment);
+const writeCommentSaga = createRequestSaga(WRITE_COMMENT, commentAPI.writeComment);
 export function* commentSaga() {
   yield takeLatest(WRITE_COMMENT, writeCommentSaga);
 }
