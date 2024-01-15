@@ -1,7 +1,7 @@
 import BoardViewerContainer from "../containers/board/BoardViewerContainer";
 import LikeContainer from "../containers/like/LikeContainer";
-import WriteCommentContainer from "../containers/comment/WriteCommentContainer";
-import CommentButtonContainer from "../containers/comment/CommentButtonContainer";
+import WriteCommentContainer from "../containers/comments/WriteCommentContainer";
+import CommentButtonContainer from "../containers/comments/CommentButtonContainer";
 
 const BoardPage = () => {
   return (
