@@ -3,9 +3,9 @@ import {createAction, handleActions} from "redux-actions";
 import {takeLatest} from "redux-saga/effects";
 import * as commentAPI from "../lib/api/comment";
 
-const INITIALIZE = 'comments/INITIALIZE';
-const CHANGE_FIELD = 'comments/CHANGE_FIELD';
-const [WRITE_COMMENT, WRITE_COMMENT_SUCCESS, WRITE_COMMENT_FAILURE] = createRequestActionTypes('comments/WRITE_COMMENT');
+const INITIALIZE = 'comment/INITIALIZE';
+const CHANGE_FIELD = 'comment/CHANGE_FIELD';
+const [WRITE_COMMENT, WRITE_COMMENT_SUCCESS, WRITE_COMMENT_FAILURE] = createRequestActionTypes('comment/WRITE_COMMENT');
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(

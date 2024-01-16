@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect} from "react";
 import {changeField, initialize} from "../../modules/comment";
-import CommentEditor from "../../components/comments/CommentEditor";
+import CommentEditor from "../../components/comment/CommentEditor";
 
 
 export default function WriteCommentContainer ()  {

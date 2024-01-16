@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {writeComment} from "../../modules/comment";
 import {useEffect} from "react";
-import CommentButton from "../../components/comments/CommentButton";
+import CommentButton from "../../components/comment/CommentButton";
 
 export default function CommentButtonContainer () {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function CommentButtonContainer () {
     content: comment.content,
     comment: comment.comment,
     commentError: comment.commentError,
-    loading: loading['comments/WRITE_COMMENT'],
+    loading: loading['comment/WRITE_COMMENT'],
   }));
 
   const onPublish = () => {
