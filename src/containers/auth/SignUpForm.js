@@ -1,13 +1,16 @@
 import AuthForm from "../../components/auth/AuthForm";
 import {useDispatch, useSelector} from "react-redux";
-import {changeField, initializeForm, signUp} from "../../modules/auth";
+import {changeField, changeFieldEmailConfirm, initializeForm, signUp} from "../../modules/auth";
 import {useEffect, useState} from "react";
+import {sendEmailConfirm} from "../../modules/email";
 
 const SignUpForm = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const dispatch = useDispatch();
-    const {form} = useSelector(({auth}) => ({
+    const {form, email, emailConfirm} = useSelector(({auth}) => ({
         form: auth.signUp,
+        email: auth.signUp.email,
+        emailConfirm: auth.emailConfirm,
     }));
 
     const onChange = e => {
@@ -18,6 +21,23 @@ const SignUpForm = () => {
                 form: 'signUp',
                 key: name,
                 value,
+            }),
+        );
+    };
+
+    const handleChangeEmailConfirm = e => {
+        const {name, value} = e.target;
+
+        dispatch(changeFieldEmailConfirm({
+                name,
+                value,
+            }),
+        );
+    };
+
+    const handleSendEmailConfirm = () => {
+        dispatch(sendEmailConfirm({
+                email
             }),
         );
     };
@@ -48,6 +68,9 @@ const SignUpForm = () => {
                   onSubmit={onSubmit}
                   onSelectPart={onSelectPart}
                   isOpenModal={isOpenModal}
+                  emailConfirm={emailConfirm}
+                  handleChangeEmailConfirm={handleChangeEmailConfirm}
+                  handleSendEmailConfirm={handleSendEmailConfirm}
         />
     );
 };

@@ -6,6 +6,7 @@ import {takeLatest} from "redux-saga/effects";
 import client from "../lib/api/client";
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
+const CHANGE_FIELD_EMAIL_CONFIRM = 'auth/CHANGE_FIELD_EMAIL_CONFIRM';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] = createRequestActionTypes(
     'auth/SIGNUP',
@@ -17,6 +18,11 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
 export const changeField = createAction(
     CHANGE_FIELD,
     ({form, key, value}) => ({form, key, value})
+);
+
+export const changeFieldEmailConfirm = createAction(
+    CHANGE_FIELD_EMAIL_CONFIRM,
+    ({name, value}) => ({name, value})
 );
 
 export const initializeForm = createAction(
@@ -60,6 +66,7 @@ const initialState = {
         organization: '',
         motto: '',
     },
+    emailConfirm: '',
     auth: null,
     authError: null,
 };
@@ -70,6 +77,10 @@ const auth = handleActions(
             state, draft => {
                 draft[form][key] = value;
             }),
+        [CHANGE_FIELD_EMAIL_CONFIRM]: (state, {payload: {name, value}}) => ({
+            ...state,
+           [name]: value,
+        }),
         [INITIALIZE_FORM]: (state, {payload: form}) => ({
             ...state,
             [form]: initialState[form]
