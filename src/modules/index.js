@@ -11,7 +11,6 @@ import admin, {adminSaga} from "./admin";
 import search, {searchSaga} from "./search";
 import comment, {commentSaga} from "./comment";
 import email, {emailSaga} from "./email";
-import mailer from "./mailer";
 
 const rootReducer = combineReducers({
     loading,
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
     search,
     comment,
     email,
-    mailer,
 });
 
 export function* rootSaga() {
