@@ -3,32 +3,32 @@ import createRequestSaga, {createRequestActionTypes} from "../lib/createRequestS
 import {takeLatest} from "redux-saga/effects";
 import * as emailAPI from "../lib/api/email";
 
-const [SEND_EMAIL_CONFIRM, SEND_EMAIL_CONFIRM_SUCCESS, SEND_EMAIL_CONFIRM_FAILURE] = createRequestActionTypes('email/SEND_EMAIL_CONFIRM');
+const [SEND_EMAIL_CODE, SEND_EMAIL_CODE_SUCCESS, SEND_EMAIL_CODE_FAILURE] = createRequestActionTypes('email/SEND_EMAIL_CODE');
 
-export const sendEmailConfirm = createAction(
-    SEND_EMAIL_CONFIRM,
+export const sendEmailCode = createAction(
+    SEND_EMAIL_CODE,
     ({email}) => ({email}),
 );
 
-const sendEmailConfirmSaga = createRequestSaga(SEND_EMAIL_CONFIRM, emailAPI.sendEmailConfirm);
+const sendEmailCodeSaga = createRequestSaga(SEND_EMAIL_CODE, emailAPI.sendEmailCode);
 export function* emailSaga() {
-    yield takeLatest(SEND_EMAIL_CONFIRM, sendEmailConfirmSaga)
+    yield takeLatest(SEND_EMAIL_CODE, sendEmailCodeSaga)
 }
 
 const initialState = {
-    email: null,
-    emailError: null,
+    emailCode: null,
+    emailCodeError: null,
 };
 
 const email = handleActions(
     {
-        [SEND_EMAIL_CONFIRM_SUCCESS]: (state, {payload: email}) => ({
+        [SEND_EMAIL_CODE_SUCCESS]: (state, {payload: emailCode}) => ({
             ...state,
-            email,
+            emailCode,
         }),
-        [SEND_EMAIL_CONFIRM_FAILURE]: (state, {payload: emailError}) => ({
+        [SEND_EMAIL_CODE_FAILURE]: (state, {payload: emailCodeError}) => ({
             ...state,
-            emailError,
+            emailCodeError,
         }),
     },
     initialState,

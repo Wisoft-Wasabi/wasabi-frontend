@@ -1,3 +1,3 @@
 import client from "./client";
 
-export const sendEmailConfirm = ({email}) => client.post('/email', ({email}));
+export const sendEmailCode = ({email}) => client.post('/email', ({email}));
