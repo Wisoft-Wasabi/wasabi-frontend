@@ -1,16 +1,17 @@
 import AuthForm from "../../components/auth/AuthForm";
 import {useDispatch, useSelector} from "react-redux";
-import {changeField, changeFieldEmailConfirm, initializeForm, signUp} from "../../modules/auth";
+import {changeField, changeFieldEmailCode, initializeForm, signUp} from "../../modules/auth";
 import {useEffect, useState} from "react";
-import {sendEmailConfirm} from "../../modules/email";
+import axios from "axios";
+import {sendEmailCode} from "../../modules/email";
 
 const SignUpForm = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const dispatch = useDispatch();
-    const {form, email, emailConfirm} = useSelector(({auth}) => ({
+    const {form, email, emailCode} = useSelector(({auth}) => ({
         form: auth.signUp,
         email: auth.signUp.email,
-        emailConfirm: auth.emailConfirm,
+        emailCode: auth.emailCode,
     }));
 
     const onChange = e => {
@@ -25,19 +26,19 @@ const SignUpForm = () => {
         );
     };
 
-    const handleChangeEmailConfirm = e => {
+    const handleChangeEmailCode = e => {
         const {name, value} = e.target;
 
-        dispatch(changeFieldEmailConfirm({
+        dispatch(changeFieldEmailCode({
                 name,
                 value,
             }),
         );
     };
 
-    const handleSendEmailConfirm = () => {
-        dispatch(sendEmailConfirm({
-                email
+    const handleSendEmailCode = () => {
+        dispatch(sendEmailCode({
+                email,
             }),
         );
     };
@@ -68,9 +69,9 @@ const SignUpForm = () => {
                   onSubmit={onSubmit}
                   onSelectPart={onSelectPart}
                   isOpenModal={isOpenModal}
-                  emailConfirm={emailConfirm}
-                  handleChangeEmailConfirm={handleChangeEmailConfirm}
-                  handleSendEmailConfirm={handleSendEmailConfirm}
+                  emailCode={emailCode}
+                  handleChangeEmailCode={handleChangeEmailCode}
+                  handleSendEmailCode={handleSendEmailCode}
         />
     );
 };

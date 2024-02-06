@@ -95,7 +95,7 @@ const partMap = [
     },
 ];
 
-const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, emailConfirm, handleChangeEmailConfirm, handleSendEmailConfirm}) => {
+const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, emailCode, handleChangeEmailCode, handleSendEmailCode}) => {
     const text = textMap[type];
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
     const passwordRef = useRef(null);
@@ -124,11 +124,11 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
               </div>
               <div>
                   <input placeholder='인증 번호'
-                         name='emailConfirm'
-                         value={emailConfirm}
-                         onChange={handleChangeEmailConfirm}
+                         name='emailCode'
+                         value={emailCode}
+                         onChange={handleChangeEmailCode}
                   />
-                  <button onClick={handleSendEmailConfirm}>전송</button>
+                  <button onClick={handleSendEmailCode}>전송</button>
               </div>
               <div>
                   <h3>비밀번호</h3>
