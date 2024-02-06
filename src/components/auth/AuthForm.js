@@ -39,7 +39,7 @@ const partMap = [
     },
 ];
 
-const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, emailConfirm, handleChangeEmailConfirm, handleSendEmailConfirm}) => {
+const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, emailCode, handleChangeEmailCode, handleSendEmailCode}) => {
     const [isClicked, setIsClicked] = useState(false);
     const text = textMap[type];
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
