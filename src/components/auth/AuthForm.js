@@ -70,7 +70,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                     {type === 'signUp' ?
                         <button className='w-full py-3 text-text4 font-semibold rounded-md bg-gray-100 hover:bg-gray-200'
                                 type='button'
-                                onClick={() => { handleSendEmailConfirm(); setIsClicked(!isClicked);}}
+                                onClick={() => { handleSendEmailCode(); setIsClicked(!isClicked);}}
                         >
                             이메일 인증하기
                         </button>
@@ -83,9 +83,9 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                         <div className='px-2 py-1 border border-gray-200 bg-background2'>
                             <input className='border-none focus:outline-none'
                                    placeholder='인증코드'
-                                   name='emailConfirm'
-                                   value={emailConfirm}
-                                   onChange={handleChangeEmailConfirm}
+                                   name='emailConde'
+                                   value={emailCode}
+                                   onChange={handleChangeEmailCode}
                             />
                             <button className='w-fit float-right px-3 text-white font-semibold rounded-sm bg-brand hover:bg-brandAccent'
                                     type='button'
@@ -93,6 +93,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                                 확인
                             </button>
                         </div>
+>>>>>>> main
                     </div>
                     : null
                 }

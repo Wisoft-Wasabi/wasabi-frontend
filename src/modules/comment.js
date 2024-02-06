@@ -24,7 +24,6 @@ export function* commentSaga() {
 }
 
 const initialState = {
-  boardId: '',
   content: '',
   comment: null,
   commentError: null,
@@ -48,7 +47,7 @@ const comment = handleActions(
     }),
     [WRITE_COMMENT_FAILURE]: (state, {payload: commentError}) => ({
       ...state,
-      commentError: null,
+      commentError,
     }),
   },
   initialState,

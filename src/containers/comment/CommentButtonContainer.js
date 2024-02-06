@@ -1,23 +1,22 @@
-import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {writeComment} from "../../modules/comment";
 import {useEffect} from "react";
 import CommentButton from "../../components/comment/CommentButton";
+import {useParams} from "react-router-dom";
 
 export default function CommentButtonContainer () {
-  const navigate = useNavigate();
+  const params = useParams();
   const dispatch = useDispatch();
-  const {boardId, content, comment, commentError, loading} = useSelector(({comment, loading}) => ({
-    boardId: comment.boardId,
+  const {content, comment, commentError, loading} = useSelector(({comment, loading}) => ({
     content: comment.content,
     comment: comment.comment,
     commentError: comment.commentError,
     loading: loading['comment/WRITE_COMMENT'],
   }));
 
-  const onPublish = () => {
+  const handlePublish = () => {
     dispatch(writeComment({
-      boardId,
+      boardId: params.boardId,
       content,
       }),
     );
@@ -34,6 +33,6 @@ export default function CommentButtonContainer () {
   }, [loading]);
 
     return (
-        <CommentButton onPublish={onPublish}/>
+        <CommentButton onPublish={handlePublish}/>
     );
 };
