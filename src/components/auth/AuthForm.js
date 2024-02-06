@@ -128,7 +128,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                          value={emailConfirm}
                          onChange={handleChangeEmailConfirm}
                   />
-                  <button onClick={handleSendEmailConfirm}>전송</button>
+                  <button onClick={handleSendEmailConfirm} type="button">전송</button>
               </div>
               <div>
                   <h3>비밀번호</h3>
