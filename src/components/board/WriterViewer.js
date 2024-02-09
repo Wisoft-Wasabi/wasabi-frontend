@@ -1,33 +1,34 @@
-import styled from "styled-components";
-
-const WriterViewerBlock = styled.div`
-  padding: 0;
-  border: none;
-  border-radius: 6px;
-  box-shadow: 0 25px 40px -20px #3c4a56;
-  background-color: #f8f8f2;
-`;
-
-const WriterContentBox = styled.div`
-  padding: 0 55px 55px 55px;
-`;
-
-const WriterContent = styled.div`
-  margin-bottom: 0.7rem;
-`;
+import {MdOutlineEmail, MdOutlineLaptopMac} from "react-icons/md";
+import {IoIosLink} from "react-icons/io";
+import {FaRegBuilding} from "react-icons/fa";
+import {TiPencil} from "react-icons/ti";
 
 const WriterViewer = ({writer}) => {
+    const {email, referenceUrl, part, organization, motto} = writer;
+
     return (
-        <WriterViewerBlock>
-            <WriterContentBox>
-                <WriterContent>📧{writer.email}</WriterContent>
-                <WriterContent>
-                    🔗<a href={writer.referenceUrl} style={{color: "black"}}>{writer.referenceUrl}</a></WriterContent>
-                <WriterContent>💻{writer.part}</WriterContent>
-                <WriterContent>🏢{writer.organization}</WriterContent>
-                <WriterContent>✏️{writer.motto}</WriterContent>
-            </WriterContentBox>
-        </WriterViewerBlock>
+        <div>
+            <div className='flex flex-row items-center gap-1'>
+                <MdOutlineEmail/>
+                <p>{email}</p>
+            </div>
+            <div className='flex flex-row items-center gap-1'>
+                <IoIosLink className='font-semibold'/>
+                <a href={referenceUrl}>{referenceUrl}</a>
+            </div>
+            <div className='flex flex-row items-center gap-1'>
+                <MdOutlineLaptopMac/>
+                <p>{part}</p>
+            </div>
+            <div className='flex flex-row items-center gap-1'>
+                <FaRegBuilding/>
+                <p>{organization}</p>
+            </div>
+            <div className='flex flex-row items-center gap-1'>
+                <TiPencil/>
+                <p>{motto}</p>
+            </div>
+        </div>
     );
 };
 
