@@ -1,10 +1,9 @@
-export default function CommentButton ({onPublish}) {
-    
+export default function CommentButton({onPublish}) {
     return (
-        <>
-            <button onClick={onPublish}
-                    className='border border-gray-300 rounded-lg w-12 h-10 hover:bg-gray-300'
-            >등록</button>
-        </>
-    )
+        <button className='px-2 py-1 text-white font-semibold rounded-md bg-brand hover:bg-brandAccent'
+                onClick={onPublish}
+        >
+            등록
+        </button>
+    );
 }
