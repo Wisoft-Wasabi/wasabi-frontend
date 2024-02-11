@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useCallback, useEffect} from "react";
+import {useEffect} from "react";
 import {changeField, initialize} from "../../modules/comment";
 import CommentEditor from "../../components/comment/CommentEditor";
 

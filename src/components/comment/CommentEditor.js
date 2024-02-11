@@ -1,13 +1,10 @@
-
-export default function CommentEditor ({content, onChange}) {
+export default function CommentEditor({content, onChange}) {
     return (
-        <>
-          <input placeholder="댓글을 입력하세요."
-                 name='content'
-                 value={content}
-                 onChange={onChange}
-                 className='border border-gray-300 rounded-lg w-96 h-14 mr-3'
-          />
-        </>
+        <textarea className='w-11/12 h-[70px] px-2 py-1 mb-2 resize-none border border-border3 focus:outline-none'
+                  placeholder="댓글을 입력하세요."
+                  name='content'
+                  value={content}
+                  onChange={onChange}
+        />
     )
 }
