@@ -3,6 +3,7 @@ import {writeComment} from "../../modules/comment";
 import {useEffect} from "react";
 import CommentButton from "../../components/comment/CommentButton";
 import {useParams} from "react-router-dom";
+import {readBoard} from "../../modules/board";
 
 export default function CommentButtonContainer () {
   const params = useParams();
@@ -24,7 +25,7 @@ export default function CommentButtonContainer () {
 
   useEffect(() => {
     if (!loading && comment) {
-      alert('댓글이 등록 되었습니다.');
+      dispatch(readBoard(params.boardId));
     }
 
     if (!loading && commentError) {

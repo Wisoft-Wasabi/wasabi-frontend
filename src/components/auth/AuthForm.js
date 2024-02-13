@@ -93,7 +93,6 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                                 확인
                             </button>
                         </div>
->>>>>>> main
                     </div>
                     : null
                 }
