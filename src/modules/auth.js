@@ -79,7 +79,7 @@ const auth = handleActions(
             }),
         [CHANGE_FIELD_EMAIL_CODE]: (state, {payload: {name, value}}) => ({
             ...state,
-           [name]: value,
+            [name]: value,
         }),
         [INITIALIZE_FORM]: (state, {payload: form}) => ({
             ...state,
@@ -95,11 +95,13 @@ const auth = handleActions(
             authError: error
         }),
         [LOGIN_SUCCESS]: (state, {payload: auth}) => {
-            try {
-                localStorage.setItem('member', JSON.stringify(auth));
-                client.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
-            } catch (e) {
-                console.log('localStorage is not working.');
+            if (auth && auth.data.activation) {
+                try {
+                    localStorage.setItem('member', JSON.stringify(auth));
+                    client.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
+                } catch (e) {
+                    console.log('LocalStorage is not working.');
+                }
             }
             return {
                 ...state,
