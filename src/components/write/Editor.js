@@ -1,30 +1,6 @@
-import styled from "styled-components";
 import {useEffect, useRef} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-
-const EditorBlock = styled.div`
-  margin-top: 5rem;
-`;
-
-const TitleInput = styled.input`
-    margin-bottom: 1rem;
-`;
-
-const QuillWrapper = styled.div`
-  margin-bottom: 1rem;
-  /* 최소 크기 지정 및 padding 제거 */
-  .ql-editor {
-    padding: 0;
-    min-height: 320px;
-    font-size: 1.125rem;
-    line-height: 1.5;
-  }.ql-editor.
-
-  ql-blank::before { /* 실제 내용 바로 앞에서 생성되는 자식 요소 */
-    left: 0px;
-  }
-`;
 
 const Editor = ({title, content, imageUrls, onChangeEditor}) => {
     const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
@@ -60,15 +36,17 @@ const Editor = ({title, content, imageUrls, onChangeEditor}) => {
     };
 
     return (
-        <EditorBlock>
-            <TitleInput placeholder="제목을 입력하세요."
-                        value={title}
-                        onChange={onChangeTitle}
+        <div>
+            <input placeholder="제목을 입력하세요."
+                   value={title}
+                   onChange={onChangeTitle}
+                   className='text-4xl text-text2 mb-5 outline-none'
             />
-            <QuillWrapper>
-                <div ref={quillElement}/>
-            </QuillWrapper>
-        </EditorBlock>
+
+            <div
+                className='h-30 min-h-80 text-2xl'
+                ref={quillElement}/>
+        </div>
     );
 };
 

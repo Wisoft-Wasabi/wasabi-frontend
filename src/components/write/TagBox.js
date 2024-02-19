@@ -1,36 +1,11 @@
 import React, {useCallback, useState} from "react";
-import styled from "styled-components";
-import Button from "../common/Button";
-
-const TagBoxBlock = styled.div`
-
-`;
-
-const TagBoxContent = styled.div`
-  height: 30px;
-`;
-
-const TagInput = styled.input`
-  height: 100%;
-  box-sizing: border-box;
-`;
-
-const Tag = styled.div`
-  width: fit-content;
-  outline: none;
-  border: none;
-  padding: 7px;
-  border-radius: 20px;
-  background-color: #4BC75F;
-  color: #FFF;
-  margin-top: 0.2rem;
-`;
 
 const TagItem = React.memo(({tag, onRemove}) => (
-    <Tag>
-        <span>#{tag}</span>
-        <span onClick={onRemove} style={{cursor: "pointer"}}>&nbsp;X</span>
-    </Tag>
+    <div className='w-fit p-2 text-md rounded-2xl bg-gray-100'>
+        <span className=' text-brand'>#{tag}</span>
+        <span className='cursor-pointer text-lg font-bold text-text4 hover:text-text3'
+              onClick={onRemove}>&nbsp;X</span>
+    </div>
 ));
 
 const TagBox = ({onChangeTag, write}) => {
@@ -80,17 +55,24 @@ const TagBox = ({onChangeTag, write}) => {
     );
 
     return (
-        <TagBoxBlock>
-            <TagBoxContent>
-                <TagInput placeholder="태그를 입력하세요."
-                          value={input}
-                          onChange={onChange}
-                          onKeyUp={onKeyUp}
+        <div className='h-24 w-fit'>
+            <div className='mb-2'>
+                <input className='outline-none text-lg text-text2 border border-gray-300 rounded-lg'
+                       placeholder="태그를 입력하세요."
+                       value={input}
+                       onChange={onChange}
+                       onKeyUp={onKeyUp}
                 />
-                <Button style={{marginLeft: "0.1rem", height: "100%"}} onClick={onInsertTag}>등록</Button>
-            </TagBoxContent>
+                <button
+                    className='bg-brand font-bold text-white rounded-md p-1.5 hover:bg-brandAccent'
+                    type='button'
+                    onClick={onInsertTag}
+                >
+                    등록
+                </button>
+            </div>
             {write.tag ? (<TagItem tag={write.tag} onRemove={onRemove}/>) : null}
-        </TagBoxBlock>
+        </div>
     );
 };
 
