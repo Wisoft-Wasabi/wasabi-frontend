@@ -13,6 +13,7 @@ import SubLayout from "./components/layout/SubLayout";
 import MyProfilePage from "./pages/MyProfilePage";
 import EtcLayout from "./components/layout/EtcLayout";
 import {AuthContextProvider} from "./context/AuthContext";
+import ErrorRoutes from "./routes/ErrorRoutes";
 
 const App = () => {
     return (
@@ -35,6 +36,7 @@ const App = () => {
                     <Route path="/admin" element={<AdminPage/>}/>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
+                <Route path='/error/*' element={<ErrorRoutes/>}/>
             </Routes>
         </AuthContextProvider>
     );

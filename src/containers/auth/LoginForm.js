@@ -25,38 +25,36 @@ const LoginForm = () => {
         );
     };
 
-    /*
-    async function afterLogin() {
-        await new Promise((resolve) => {
-            if(loading === false) {
-                resolve();
-            }
-        });
-
-        if (auth) {
-            navigate('/');
-        } else if(authError) {
-            alert('로그인 실패');
-        }
-    }
-    */
-
     const onKeyPress = e => {
         if (e.key === 'Enter') {
-            onSubmit(); // Enter 입력이 되면 Submit 실행
+            onSubmit();
         }
     }
 
     const onSubmit = () => {
         const {email, password} = form;
+
         dispatch(login({email, password}));
-        navigate('/');
-        // afterLogin().then();
     };
 
     useEffect(() => {
         dispatch(initializeForm('login'));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (auth && auth.data.activation) {
+            navigate('/');
+        }
+
+        if (auth && !auth.data.activation) {
+            navigate('/error/activation');
+        }
+
+        if (authError) {
+            alert('Fail Login.');
+            dispatch(initializeForm('login'));
+        }
+    }, [auth, authError]);
 
     return (
       <AuthForm type="login"
