@@ -1,8 +1,9 @@
-import Button from "../common/Button";
-
 const WriteButton = ({onPublish}) => {
     return (
-        <Button onClick={onPublish} style={{marginTop: "2rem"}}>등록하기</Button>
+        <button
+            className=' w-40 h-10 bg-brand text-lg text-white font-bold rounded-md hover:bg-brandAccent'
+            type='button'
+            onClick={onPublish}>출간하기</button>
     );
 };
 
