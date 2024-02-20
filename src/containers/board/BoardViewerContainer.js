@@ -7,10 +7,8 @@ import {useParams} from "react-router-dom";
 const BoardViewerContainer = () => {
     const {boardId} = useParams();
     const dispatch = useDispatch();
-    const {board, boardError, loading} = useSelector(({board, loading}) => ({
+    const {board} = useSelector(({board, loading}) => ({
         board: board.board,
-        boardError: board.boardError,
-        loading: loading['board/READ_BOARD'],
     }));
 
     useEffect(() => {
@@ -23,7 +21,7 @@ const BoardViewerContainer = () => {
     }, [dispatch, boardId]);
 
     return (
-        <BoardViewer board={board} boardError={boardError} loading={loading}/>
+        <BoardViewer board={board}/>
     );
 };
 

@@ -2,25 +2,12 @@ import WriterViewer from "./WriterViewer";
 import {useRef} from "react";
 import CommentViewer from "../comment/CommentViewer";
 
-const BoardViewer = ({board, boardError, loading}) => {
+const BoardViewer = ({board}) => {
     const writerInfo = useRef(null);
 
     const handleMove = () => {
         writerInfo.current?.scrollIntoView({ behavior: 'smooth' });
     };
-
-    // 에러 발생 시
-    if (boardError) {
-        if (boardError.response.status === 404) {
-            return <div>존재하지 않는 포스트입니다.</div>
-        }
-        return <div>오류 발생!</div>
-    }
-
-    // 로딩 중이거나 아직 포스트 데이터가 없을 때
-    if (loading || !board) {
-        return null;
-    }
 
     const {title, content, writer, createdAt, tag, views, comments} = board.data;
 
