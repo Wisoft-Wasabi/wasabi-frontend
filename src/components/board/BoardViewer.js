@@ -38,7 +38,7 @@ const BoardViewer = ({board, boardError, loading}) => {
                     <div>{new Date(createdAt).toLocaleString()} •</div>
                     <div>{views}명이 조회했어요.</div>
                 </div>
-                <div className='text-justify text-text2 text-lg'
+                <div className='text-justify text-text2 text-lg overflow-x-auto'
                      dangerouslySetInnerHTML={{__html: content}}
                 /> {/* HTML 적용 */}
             </div>
