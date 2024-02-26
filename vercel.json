@@ -1,5 +1,8 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "https://api.wasabi.wiki", "permanent": true }
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "https://api.wasabi.wiki/:path*"
+    }
   ]
 }
