@@ -65,5 +65,5 @@
     "http-proxy-middleware": "^2.0.6",
     "tailwindcss": "^3.4.0"
   },
-  "proxy": "https://172.20.10.7:8080"
+  "proxy": "https://test.wasabi.wiki:8080"
 }
