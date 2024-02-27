@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/:path*",
-      "destination": "http://test.wasabi.wiki/:path*"
+      "destination": "http://test.wasabi.wiki:8080/:path*"
     }
   ]
 }
