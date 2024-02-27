@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/:path*",
-      "destination": "https://api.wasabi.wiki/:path*"
+      "destination": "https://test.wasabi.wiki/:path*"
     }
   ]
 }
