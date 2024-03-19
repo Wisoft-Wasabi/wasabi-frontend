@@ -10,7 +10,7 @@ import myPage, {myPageSaga} from "./mypage";
 import admin, {adminSaga} from "./admin";
 import search, {searchSaga} from "./search";
 import comment, {commentSaga} from "./comment";
-import email, {emailSaga} from "./email";
+import mail, {mailSaga} from "./mail";
 
 const rootReducer = combineReducers({
     loading,
@@ -23,11 +23,11 @@ const rootReducer = combineReducers({
     admin,
     search,
     comment,
-    email,
+    mail,
 });
 
 export function* rootSaga() {
-    yield all([authSaga(), writeSaga(), boardSaga(), likeSaga(), boardsSaga(), myPageSaga(), adminSaga(), searchSaga(), commentSaga(), emailSaga()]);
+    yield all([authSaga(), writeSaga(), boardSaga(), likeSaga(), boardsSaga(), myPageSaga(), adminSaga(), searchSaga(), commentSaga(), mailSaga()]);
 }
 
 export default rootReducer;
