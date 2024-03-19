@@ -39,7 +39,7 @@ const partMap = [
     },
 ];
 
-const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, emailCode, handleChangeEmailCode, handleSendEmailCode}) => {
+const AuthForm = ({type, form, authCode, onChange, onSubmit, onKeyPress, onSelectPart, isOpenModal, handleVerifyEmail, handleChangeAuthCode, handleCheckCode}) => {
     const [isClicked, setIsClicked] = useState(false);
     const text = textMap[type];
     const {register, handleSubmit, watch, formState: {errors}} = useForm();
@@ -70,7 +70,7 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                     {type === 'signUp' ?
                         <button className='w-full py-3 text-text4 font-semibold rounded-md bg-gray-100 hover:bg-gray-200'
                                 type='button'
-                                onClick={() => { handleSendEmailCode(); setIsClicked(!isClicked);}}
+                                onClick={() => { handleVerifyEmail(); setIsClicked(!isClicked);}}
                         >
                             이메일 인증하기
                         </button>
@@ -83,12 +83,13 @@ const AuthForm = ({type, form, onChange, onSubmit, onKeyPress, onSelectPart, isO
                         <div className='px-2 py-1 border border-gray-200 bg-background2'>
                             <input className='border-none focus:outline-none'
                                    placeholder='인증코드'
-                                   name='emailConde'
-                                   value={emailCode}
-                                   onChange={handleChangeEmailCode}
+                                   name='authCode'
+                                   value={authCode}
+                                   onChange={handleChangeAuthCode}
                             />
                             <button className='w-fit float-right px-3 text-white font-semibold rounded-sm bg-brand hover:bg-brandAccent'
                                     type='button'
+                                    onClick={handleCheckCode}
                             >
                                 확인
                             </button>

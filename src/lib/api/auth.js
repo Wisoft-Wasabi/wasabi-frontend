@@ -5,3 +5,5 @@ export const signUp = ({email, password, checkPassword, name, phoneNumber, refer
 
 export const login = ({email, password}) =>
     client.post("/auth/login", ({email, password}));
+
+export const verifyEmail = ({email}) => client.post('/auth/mail', ({email}));
