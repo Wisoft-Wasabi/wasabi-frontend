@@ -58,7 +58,7 @@ const BoardList = ({boards, loading}) => {
 
     return (
         <>
-            {!loading && boards && (
+            {!loading && boards && boards.data!==undefined && (
                 boards.data.content.length !== 0
                     ? <div className='xl:grid xl:grid-cols-3 xl:grid-rows-2 xl:gap-12 xl:mt-12  md:grid md:grid-cols-2 md:grid-rows-2 md:gap-12 md:mt-12  grid grid-cols-1 gap-12 mt-12'>
                         {boards.data.content.map(board => (

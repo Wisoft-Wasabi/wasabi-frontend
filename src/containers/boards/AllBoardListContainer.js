@@ -39,7 +39,8 @@ const AllBoardListContainer = () => {
     }, [page]);
 
     useEffect(() => {
-        if (boards) {
+        console.log(boards);
+        if (boards && boards.data !== undefined) {
             setAllBoards(prevBoards => [...prevBoards, ...boards.data.content]);
             setLoadingMore(false);
             if (boards.data.content.length === 0) {
@@ -60,7 +61,7 @@ const AllBoardListContainer = () => {
                           onIntersect={handlePage}
                           boardsList={allBoards}
             />
-            {!boardsLoading && boards && (
+            {!boardsLoading && boards && boards.data !== undefined &&(
                 <InfiniteScroll onIntersect={handlePage} />
             )}
         </>
